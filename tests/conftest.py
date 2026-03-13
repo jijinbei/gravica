@@ -9,6 +9,9 @@ from atlas.einstein import EinsteinTensor
 from atlas.weyl import WeylTensor
 from atlas.metrics.minkowski import minkowski
 from atlas.metrics.schwarzschild import schwarzschild
+from atlas.metrics.flrw import flrw
+from atlas.metrics.kerr import kerr
+from atlas.metrics.godel import godel
 
 
 @pytest.fixture(scope="session")
@@ -69,3 +72,44 @@ def mink_weyl(mink_riemann, mink_ricci):
 @pytest.fixture(scope="session")
 def schw_weyl(schw_riemann, schw_ricci):
     return WeylTensor(schw_riemann, schw_ricci)
+
+
+# --- FLRW ---
+
+@pytest.fixture(scope="session")
+def flrw_metric():
+    return flrw()
+
+
+@pytest.fixture(scope="session")
+def flrw_christoffel(flrw_metric):
+    return ChristoffelSymbols(flrw_metric)
+
+
+# --- Kerr ---
+
+@pytest.fixture(scope="session")
+def kerr_metric():
+    return kerr()
+
+
+# --- Gödel ---
+
+@pytest.fixture(scope="session")
+def godel_metric():
+    return godel()
+
+
+@pytest.fixture(scope="session")
+def godel_christoffel(godel_metric):
+    return ChristoffelSymbols(godel_metric)
+
+
+@pytest.fixture(scope="session")
+def godel_riemann(godel_christoffel):
+    return RiemannTensor(godel_christoffel)
+
+
+@pytest.fixture(scope="session")
+def godel_ricci(godel_riemann):
+    return RicciTensor(godel_riemann)
