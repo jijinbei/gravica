@@ -1,17 +1,40 @@
 """Shared fixtures for GR tests."""
 
 import pytest
+from symbolica import Expression
 from atlas.metric import MetricTensor
 from atlas.christoffel import ChristoffelSymbols
 from atlas.riemann import RiemannTensor
 from atlas.ricci import RicciTensor
 from atlas.einstein import EinsteinTensor
 from atlas.weyl import WeylTensor
+from atlas.simplify import simplify, str_is_zero
 from atlas.metrics.minkowski import minkowski
 from atlas.metrics.schwarzschild import schwarzschild
 from atlas.metrics.flrw import flrw
 from atlas.metrics.kerr import kerr
 from atlas.metrics.godel import godel
+
+
+def assert_zero(expr, msg=""):
+    """Assert an expression is symbolically zero after simplification."""
+    val = simplify(expr)
+    assert str_is_zero(val), msg or f"Expected 0, got {val}"
+
+
+def check_inverse_identity(metric: MetricTensor):
+    """Verify g_{ac} g^{cb} = delta^b_a."""
+    n = metric.dim
+    g = metric.components
+    g_inv = metric.inverse
+    for a in range(n):
+        for b in range(n):
+            val = Expression.num(0)
+            for c in range(n):
+                val = val + g[a][c] * g_inv[c][b]
+            val = simplify(val)
+            expected = "1" if a == b else "0"
+            assert str(val) == expected, f"g g^-1 [{a}][{b}] = {val}, expected {expected}"
 
 
 @pytest.fixture(scope="session")

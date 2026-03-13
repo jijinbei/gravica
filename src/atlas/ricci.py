@@ -6,7 +6,7 @@ from symbolica import Expression
 
 from atlas.riemann import RiemannTensor
 from atlas.metric import MetricTensor, ZERO
-from atlas.simplify import simplify
+from atlas.simplify import simplify, str_is_zero
 
 
 class RicciTensor:
@@ -35,7 +35,7 @@ class RicciTensor:
                 val = ZERO
                 for c in range(n):
                     r_cacb = R[c, a, c, b]
-                    if str(r_cacb) != "0":
+                    if not str_is_zero(r_cacb):
                         val = val + r_cacb
                 val = simplify(val)
                 self._components[a][b] = val
@@ -55,6 +55,6 @@ def ricci_scalar(ricci: RicciTensor) -> Expression:
         for b in range(n):
             g_ab = g_inv[a][b]
             r_ab = ricci[a, b]
-            if str(g_ab) != "0" and str(r_ab) != "0":
+            if not str_is_zero(g_ab) and not str_is_zero(r_ab):
                 val = val + g_ab * r_ab
     return simplify(val)

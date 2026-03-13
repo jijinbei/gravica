@@ -5,6 +5,11 @@ from symbolica import Expression
 _ZERO = Expression.num(0)
 
 
+def str_is_zero(expr: Expression) -> bool:
+    """Fast zero check via string representation (for optimization skips)."""
+    return str(expr) == "0"
+
+
 def simplify(expr: Expression) -> Expression:
     """Best-effort simplification: together then cancel.
 
@@ -29,7 +34,7 @@ def is_zero(expr: Expression, coords: tuple[Expression, ...] | None = None) -> b
     """
     s = simplify(expr)
     text = str(s)
-    if text == "0":
+    if str_is_zero(s):
         return True
 
     if coords is not None:
@@ -42,7 +47,7 @@ def is_zero(expr: Expression, coords: tuple[Expression, ...] | None = None) -> b
                 for var, val in vals.items():
                     numerical = numerical.replace(var, val)
                 numerical = simplify(numerical)
-                if str(numerical) != "0":
+                if not str_is_zero(numerical):
                     return False
             except Exception:
                 pass

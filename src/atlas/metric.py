@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from symbolica import Expression
 
-from atlas.simplify import simplify
+from atlas.simplify import simplify, str_is_zero
 
 # Type alias: a 4x4 (or NxN) grid of Expressions
 Grid = list[list[Expression]]
@@ -32,7 +32,7 @@ def symbolic_det(matrix: Grid) -> Expression:
 
     det = ZERO
     for j in range(n):
-        if str(matrix[0][j]) == "0":
+        if str_is_zero(matrix[0][j]):
             continue
         cofactor = symbolic_det(_minor(matrix, 0, j))
         if j % 2 == 0:
@@ -46,8 +46,7 @@ def symbolic_inverse(matrix: Grid) -> Grid:
     """Compute the inverse of a symbolic square matrix using cofactors."""
     n = len(matrix)
     det = symbolic_det(matrix)
-    det_str = str(det)
-    if det_str == "0":
+    if str_is_zero(det):
         raise ValueError("Matrix is singular (determinant is zero)")
 
     inv_det = ONE / det
@@ -112,6 +111,6 @@ class MetricTensor:
     def is_diagonal(self) -> bool:
         for i in range(self.dim):
             for j in range(self.dim):
-                if i != j and str(self.components[i][j]) != "0":
+                if i != j and not str_is_zero(self.components[i][j]):
                     return False
         return True

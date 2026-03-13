@@ -5,7 +5,7 @@ from __future__ import annotations
 from symbolica import Expression
 
 from atlas.metric import MetricTensor, Grid, ZERO
-from atlas.simplify import simplify
+from atlas.simplify import simplify, str_is_zero
 
 
 class ChristoffelSymbols:
@@ -71,10 +71,10 @@ class ChristoffelSymbols:
                     val = ZERO
                     for d in range(n):
                         g_ad = g_inv[a][d]
-                        if str(g_ad) == "0":
+                        if str_is_zero(g_ad):
                             continue
                         gamma_dbc = first[d][b][c]
-                        if str(gamma_dbc) == "0":
+                        if str_is_zero(gamma_dbc):
                             continue
                         val = val + g_ad * gamma_dbc
                     val = simplify(val)

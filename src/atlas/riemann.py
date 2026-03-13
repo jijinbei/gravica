@@ -6,7 +6,7 @@ from symbolica import Expression
 
 from atlas.christoffel import ChristoffelSymbols
 from atlas.metric import ZERO
-from atlas.simplify import simplify
+from atlas.simplify import simplify, str_is_zero
 
 
 class RiemannTensor:
@@ -56,9 +56,9 @@ class RiemannTensor:
                             g_edb = gamma[e][d][b]
                             g_ecb = gamma[e][c][b]
 
-                            if str(g_ace) != "0" and str(g_edb) != "0":
+                            if not str_is_zero(g_ace) and not str_is_zero(g_edb):
                                 val = val + g_ace * g_edb
-                            if str(g_ade) != "0" and str(g_ecb) != "0":
+                            if not str_is_zero(g_ade) and not str_is_zero(g_ecb):
                                 val = val - g_ade * g_ecb
 
                         val = simplify(val)
@@ -76,10 +76,10 @@ class RiemannTensor:
         n = self.dim
         val = ZERO
         for e in range(n):
-            if str(g[a][e]) == "0":
+            if str_is_zero(g[a][e]):
                 continue
             r_ebcd = self[e, b, c, d]
-            if str(r_ebcd) == "0":
+            if str_is_zero(r_ebcd):
                 continue
             val = val + g[a][e] * r_ebcd
         return simplify(val)

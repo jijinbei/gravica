@@ -3,7 +3,7 @@
 Verified on Schwarzschild spacetime, which has nontrivial curvature.
 """
 
-from atlas.simplify import simplify
+from conftest import assert_zero
 
 
 def test_first_bianchi_identity(schw_riemann):
@@ -20,10 +20,10 @@ def test_first_bianchi_identity(schw_riemann):
                     r1 = R.fully_covariant(a, b, c, d)
                     r2 = R.fully_covariant(a, c, d, b)
                     r3 = R.fully_covariant(a, d, b, c)
-                    total = simplify(r1 + r2 + r3)
-                    assert str(total) == "0", (
+                    assert_zero(
+                        r1 + r2 + r3,
                         f"Bianchi failed: R_{{{a}{b}{c}{d}}} + R_{{{a}{c}{d}{b}}} "
-                        f"+ R_{{{a}{d}{b}{c}}} = {total}"
+                        f"+ R_{{{a}{d}{b}{c}}} = {r1 + r2 + r3}",
                     )
 
 
@@ -37,9 +37,9 @@ def test_riemann_pair_symmetry(schw_riemann):
                 for d in range(n):
                     r_abcd = R.fully_covariant(a, b, c, d)
                     r_cdab = R.fully_covariant(c, d, a, b)
-                    diff = simplify(r_abcd - r_cdab)
-                    assert str(diff) == "0", (
-                        f"R_{{{a}{b}{c}{d}}} != R_{{{c}{d}{a}{b}}}: diff={diff}"
+                    assert_zero(
+                        r_abcd - r_cdab,
+                        f"R_{{{a}{b}{c}{d}}} != R_{{{c}{d}{a}{b}}}: diff={r_abcd - r_cdab}",
                     )
 
 
@@ -53,7 +53,7 @@ def test_riemann_first_pair_antisymmetry(schw_riemann):
                 for d in range(n):
                     r_abcd = R.fully_covariant(a, b, c, d)
                     r_bacd = R.fully_covariant(b, a, c, d)
-                    total = simplify(r_abcd + r_bacd)
-                    assert str(total) == "0", (
-                        f"R_{{{a}{b}{c}{d}}} + R_{{{b}{a}{c}{d}}} = {total} != 0"
+                    assert_zero(
+                        r_abcd + r_bacd,
+                        f"R_{{{a}{b}{c}{d}}} + R_{{{b}{a}{c}{d}}} = {r_abcd + r_bacd} != 0",
                     )

@@ -1,18 +1,19 @@
 """Tests for Ricci tensor and scalar."""
 
 from atlas.ricci import ricci_scalar
-from atlas.simplify import simplify
+from atlas.simplify import str_is_zero
+from conftest import assert_zero
 
 
 def test_minkowski_ricci_zero(mink_ricci):
     """All Ricci components vanish for flat spacetime."""
     for a in range(4):
         for b in range(4):
-            assert str(mink_ricci[a, b]) == "0"
+            assert str_is_zero(mink_ricci[a, b])
 
 
 def test_minkowski_scalar_zero(mink_ricci):
-    assert str(ricci_scalar(mink_ricci)) == "0"
+    assert str_is_zero(ricci_scalar(mink_ricci))
 
 
 def test_schwarzschild_vacuum(schw_ricci):
@@ -20,10 +21,10 @@ def test_schwarzschild_vacuum(schw_ricci):
     for a in range(4):
         for b in range(4):
             val = schw_ricci[a, b]
-            assert str(val) == "0", f"R_{{{a}{b}}} = {val}"
+            assert str_is_zero(val), f"R_{{{a}{b}}} = {val}"
 
 
 def test_schwarzschild_scalar_zero(schw_ricci):
     """Schwarzschild Ricci scalar = 0."""
     R = ricci_scalar(schw_ricci)
-    assert str(R) == "0"
+    assert str_is_zero(R)

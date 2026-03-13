@@ -1,26 +1,10 @@
 """Tests for FLRW metric."""
 
-from atlas.simplify import simplify
-from symbolica import Expression
-
-
-def _check_inverse_identity(metric):
-    """Verify g_{ac} g^{cb} = delta^b_a."""
-    n = metric.dim
-    g = metric.components
-    g_inv = metric.inverse
-    for a in range(n):
-        for b in range(n):
-            val = Expression.num(0)
-            for c in range(n):
-                val = val + g[a][c] * g_inv[c][b]
-            val = simplify(val)
-            expected = "1" if a == b else "0"
-            assert str(val) == expected, f"g g^-1 [{a}][{b}] = {val}, expected {expected}"
+from conftest import check_inverse_identity
 
 
 def test_flrw_metric_inverse(flrw_metric):
-    _check_inverse_identity(flrw_metric)
+    check_inverse_identity(flrw_metric)
 
 
 def test_flrw_diagonal(flrw_metric):

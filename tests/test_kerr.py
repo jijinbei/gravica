@@ -2,25 +2,11 @@
 
 from atlas.simplify import simplify
 from symbolica import Expression, S
-
-
-def _check_inverse_identity(metric):
-    """Verify g_{ac} g^{cb} = delta^b_a."""
-    n = metric.dim
-    g = metric.components
-    g_inv = metric.inverse
-    for a in range(n):
-        for b in range(n):
-            val = Expression.num(0)
-            for c in range(n):
-                val = val + g[a][c] * g_inv[c][b]
-            val = simplify(val)
-            expected = "1" if a == b else "0"
-            assert str(val) == expected, f"g g^-1 [{a}][{b}] = {val}, expected {expected}"
+from conftest import check_inverse_identity, assert_zero
 
 
 def test_kerr_metric_inverse(kerr_metric):
-    _check_inverse_identity(kerr_metric)
+    check_inverse_identity(kerr_metric)
 
 
 def test_kerr_not_diagonal(kerr_metric):
@@ -46,6 +32,7 @@ def test_kerr_reduces_to_schwarzschild(kerr_metric):
             schw_sub = schw_comp.replace(r_s, Expression.num(2) * M)
             schw_sub = simplify(schw_sub)
             diff = simplify(kerr_comp - schw_sub)
-            assert str(diff) == "0", (
-                f"g[{i},{j}]: Kerr(a=0)={kerr_comp} != Schw={schw_sub}, diff={diff}"
+            assert_zero(
+                kerr_comp - schw_sub,
+                f"g[{i},{j}]: Kerr(a=0)={kerr_comp} != Schw={schw_sub}, diff={diff}",
             )

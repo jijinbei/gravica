@@ -1,26 +1,12 @@
 """Tests for Gödel metric."""
 
-from atlas.simplify import simplify
+from atlas.simplify import simplify, str_is_zero
 from symbolica import Expression, S
-
-
-def _check_inverse_identity(metric):
-    """Verify g_{ac} g^{cb} = delta^b_a."""
-    n = metric.dim
-    g = metric.components
-    g_inv = metric.inverse
-    for a in range(n):
-        for b in range(n):
-            val = Expression.num(0)
-            for c in range(n):
-                val = val + g[a][c] * g_inv[c][b]
-            val = simplify(val)
-            expected = "1" if a == b else "0"
-            assert str(val) == expected, f"g g^-1 [{a}][{b}] = {val}, expected {expected}"
+from conftest import check_inverse_identity, assert_zero
 
 
 def test_godel_metric_inverse(godel_metric):
-    _check_inverse_identity(godel_metric)
+    check_inverse_identity(godel_metric)
 
 
 def test_godel_not_diagonal(godel_metric):
@@ -34,7 +20,7 @@ def test_godel_christoffel_nonzero(godel_christoffel):
     for a in range(4):
         for b in range(4):
             for c in range(b, 4):
-                if str(godel_christoffel[a, b, c]) != "0":
+                if not str_is_zero(godel_christoffel[a, b, c]):
                     has_nonzero = True
                     break
             if has_nonzero:
@@ -66,7 +52,7 @@ def test_godel_ricci_scalar_constant(godel_ricci, godel_metric):
     R_simplified = simplify(R.replace(e2x, ex2))
 
     expected = Expression.num(1) / a_sym ** 2
-    diff = simplify(R_simplified - expected)
-    assert str(diff) == "0", (
-        f"Ricci scalar: got {R_simplified}, expected 1/a², diff={diff}"
+    assert_zero(
+        R_simplified - expected,
+        f"Ricci scalar: got {R_simplified}, expected 1/a², diff={simplify(R_simplified - expected)}",
     )

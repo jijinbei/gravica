@@ -2,30 +2,15 @@
 
 from atlas.metric import MetricTensor, symbolic_det, symbolic_inverse
 from atlas.simplify import simplify, is_zero
-from symbolica import Expression
-
-
-def _check_inverse_identity(metric: MetricTensor):
-    """Verify g_{ac} g^{cb} = δ^b_a."""
-    n = metric.dim
-    g = metric.components
-    g_inv = metric.inverse
-    for a in range(n):
-        for b in range(n):
-            val = Expression.num(0)
-            for c in range(n):
-                val = val + g[a][c] * g_inv[c][b]
-            val = simplify(val)
-            expected = "1" if a == b else "0"
-            assert str(val) == expected, f"g_{{a{a}c}} g^{{c{b}}} = {val}, expected {expected}"
+from conftest import check_inverse_identity
 
 
 def test_minkowski_inverse(mink):
-    _check_inverse_identity(mink)
+    check_inverse_identity(mink)
 
 
 def test_schwarzschild_inverse(schw):
-    _check_inverse_identity(schw)
+    check_inverse_identity(schw)
 
 
 def test_minkowski_det(mink):
