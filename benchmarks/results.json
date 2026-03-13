@@ -1,0 +1,113 @@
+{
+  "minkowski": {
+    "metric_inverse": {
+      "atlas": 0.00012231399887241423,
+      "einsteinpy": 6.292299076449126e-05,
+      "speedup": 0.5144381783325247
+    },
+    "christoffel": {
+      "atlas": 0.00018913298845291138,
+      "einsteinpy": 0.006270207988563925,
+      "speedup": 33.15237621873153
+    },
+    "riemann": {
+      "atlas": 0.0004164400015724823,
+      "einsteinpy": 0.038028246999601834,
+      "speedup": 91.3174691576379
+    },
+    "ricci": {
+      "atlas": 1.589999010320753e-05,
+      "einsteinpy": 0.0011519590043462813,
+      "speedup": 72.45029694162481
+    },
+    "ricci_scalar": {
+      "atlas": 4.492001608014107e-06,
+      "einsteinpy": 0.0021199049951974303,
+      "speedup": 471.9288148551288
+    },
+    "einstein": {
+      "atlas": 3.323498822283e-05,
+      "einsteinpy": 0.04624477399920579,
+      "speedup": 1391.4484846255798
+    },
+    "weyl": {
+      "atlas": 0.0026652740052668378,
+      "einsteinpy": null,
+      "speedup": null
+    }
+  },
+  "schwarzschild": {
+    "metric_inverse": {
+      "atlas": 0.00026638200506567955,
+      "einsteinpy": 9.796000085771084e-05,
+      "speedup": 0.36774256141497874
+    },
+    "christoffel": {
+      "atlas": 0.00043856201227754354,
+      "einsteinpy": 0.009870611989754252,
+      "speedup": 22.50676463858353
+    },
+    "riemann": {
+      "atlas": 0.001087859011022374,
+      "einsteinpy": 0.1617294660100015,
+      "speedup": 148.6676714273916
+    },
+    "ricci": {
+      "atlas": 4.881899803876877e-05,
+      "einsteinpy": 0.0019399459997657686,
+      "speedup": 39.73752181937847
+    },
+    "ricci_scalar": {
+      "atlas": 6.400994607247412e-06,
+      "einsteinpy": 0.012938857995322905,
+      "speedup": 2021.3824240178415
+    },
+    "einstein": {
+      "atlas": 3.961299080401659e-05,
+      "einsteinpy": 0.17199299500498455,
+      "speedup": 4341.8331086363005
+    },
+    "weyl": {
+      "atlas": 0.0036602939944714308,
+      "einsteinpy": null,
+      "speedup": null
+    }
+  },
+  "flrw": {
+    "metric_inverse": {
+      "atlas": 0.0003185549867339432,
+      "einsteinpy": 0.00010062899673357606,
+      "speedup": 0.3158920780531409
+    },
+    "christoffel": {
+      "atlas": 0.0005086579913040623,
+      "einsteinpy": 0.011761232992284931,
+      "speedup": 23.122084373691433
+    },
+    "riemann": {
+      "atlas": 0.0011595020041568205,
+      "einsteinpy": 0.17060746499919333,
+      "speedup": 147.1385684436635
+    },
+    "ricci": {
+      "atlas": 0.00012404499284457415,
+      "einsteinpy": 0.03668603301048279,
+      "speedup": 295.74779416086255
+    },
+    "ricci_scalar": {
+      "atlas": 8.909498865250498e-05,
+      "einsteinpy": 0.04845319800369907,
+      "speedup": 543.8375237094411
+    },
+    "einstein": {
+      "atlas": 0.00024977000430226326,
+      "einsteinpy": 0.2568994690082036,
+      "speedup": 1028.5441189219523
+    },
+    "weyl": {
+      "atlas": 0.0047102169919526204,
+      "einsteinpy": null,
+      "speedup": null
+    }
+  }
+}
