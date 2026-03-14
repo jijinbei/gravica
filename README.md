@@ -63,8 +63,8 @@ All benchmarks measured on the same machine. Median of 3 runs with GC disabled.
 ### Reproduce
 
 ```bash
-uv run python benchmarks/run_benchmarks.py    # Run benchmarks
-uv run python benchmarks/plot_benchmarks.py   # Generate charts
+uv run benchmarks/run_benchmarks.py    # Run benchmarks
+uv run benchmarks/plot_benchmarks.py   # Generate charts
 ```
 
 ## Architecture
