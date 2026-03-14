@@ -1,8 +1,8 @@
-# Atlas
+# Gravica
 
 General Relativity computation library built on [Symbolica](https://symbolica.io/) (Rust-powered CAS).
 
-Atlas computes the full GR tensor chain — from metric tensor to Einstein tensor — using Symbolica's high-performance symbolic algebra engine, achieving **23x–4300x speedup** over EinsteinPy/SymPy.
+Gravica computes the full GR tensor chain — from metric tensor to Einstein tensor — using Symbolica's high-performance symbolic algebra engine, achieving **23x–4300x speedup** over EinsteinPy/SymPy.
 
 ## Features
 
@@ -14,15 +14,15 @@ Atlas computes the full GR tensor chain — from metric tensor to Einstein tenso
 ## Quick Start
 
 ```bash
-uv add atlas
+uv add gravica
 ```
 
 ```python
-from atlas.metrics.schwarzschild import schwarzschild
-from atlas.christoffel import ChristoffelSymbols
-from atlas.riemann import RiemannTensor
-from atlas.ricci import RicciTensor, ricci_scalar
-from atlas.einstein import EinsteinTensor
+from gravica.metrics.schwarzschild import schwarzschild
+from gravica.christoffel import ChristoffelSymbols
+from gravica.riemann import RiemannTensor
+from gravica.ricci import RicciTensor, ricci_scalar
+from gravica.einstein import EinsteinTensor
 
 metric = schwarzschild()
 christoffel = ChristoffelSymbols(metric)
@@ -36,7 +36,7 @@ for a in range(4):
         assert str(einstein[a, b]) == "0"
 ```
 
-## Benchmarks: Atlas vs EinsteinPy
+## Benchmarks: Gravica vs EinsteinPy
 
 All benchmarks measured on the same machine. Median of 3 runs with GC disabled.
 

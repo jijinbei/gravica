@@ -1,6 +1,6 @@
 """Tests for Gödel metric."""
 
-from atlas.simplify import simplify, str_is_zero
+from gravica.simplify import simplify, str_is_zero
 from symbolica import Expression, S
 from conftest import check_inverse_identity, assert_zero
 
@@ -36,7 +36,7 @@ def test_godel_ricci_scalar_constant(godel_ricci, godel_metric):
     Symbolica treats exp(2x) and exp(x)² as independent, so we substitute
     exp(2x) -> exp(x)² to allow cancellation.
     """
-    from atlas.ricci import ricci_scalar
+    from gravica.ricci import ricci_scalar
 
     R = ricci_scalar(godel_ricci)
     R_str = str(R)

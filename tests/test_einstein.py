@@ -1,6 +1,6 @@
 """Tests for Einstein tensor."""
 
-from atlas.simplify import str_is_zero
+from gravica.simplify import str_is_zero
 
 
 def test_minkowski_einstein_zero(mink_einstein):

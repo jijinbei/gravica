@@ -11,11 +11,11 @@ from einsteinpy.symbolic import (
     EinsteinTensor as EPyEinstein,
 )
 
-from atlas.metrics.schwarzschild import schwarzschild
-from atlas.christoffel import ChristoffelSymbols
-from atlas.riemann import RiemannTensor
-from atlas.ricci import RicciTensor, ricci_scalar
-from atlas.einstein import EinsteinTensor
+from gravica.metrics.schwarzschild import schwarzschild
+from gravica.christoffel import ChristoffelSymbols
+from gravica.riemann import RiemannTensor
+from gravica.ricci import RicciTensor, ricci_scalar
+from gravica.einstein import EinsteinTensor
 
 
 def _atlas_to_sympy(expr_str: str) -> sympy.Expr:

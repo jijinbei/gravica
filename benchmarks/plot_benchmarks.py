@@ -29,7 +29,7 @@ METRIC_LABELS = {
 }
 
 COLORS = {
-    "atlas": "#2563EB",
+    "gravica": "#2563EB",
     "einsteinpy": "#DC2626",
 }
 
@@ -51,20 +51,20 @@ def plot_time_comparison(results: dict) -> None:
     metrics = list(METRIC_LABELS.keys())
 
     fig, axes = plt.subplots(1, 3, figsize=(16, 5), sharey=True)
-    fig.suptitle("Computation Time: Atlas (Symbolica) vs EinsteinPy (SymPy)", fontsize=14, fontweight="bold", y=1.02)
+    fig.suptitle("Computation Time: Gravica (Symbolica) vs EinsteinPy (SymPy)", fontsize=14, fontweight="bold", y=1.02)
 
     for ax, metric in zip(axes, metrics):
         atlas_times = []
         epy_times = []
         for step in steps:
             data = results[metric][step]
-            atlas_times.append(to_ms(data["atlas"]))
+            atlas_times.append(to_ms(data["gravica"]))
             epy_times.append(to_ms(data["einsteinpy"]))
 
         x = np.arange(len(steps))
         width = 0.35
 
-        bars_atlas = ax.bar(x - width / 2, atlas_times, width, label="Atlas", color=COLORS["atlas"], zorder=3)
+        bars_atlas = ax.bar(x - width / 2, atlas_times, width, label="Gravica", color=COLORS["gravica"], zorder=3)
         bars_epy = ax.bar(x + width / 2, epy_times, width, label="EinsteinPy", color=COLORS["einsteinpy"], zorder=3)
 
         ax.set_title(METRIC_LABELS[metric], fontsize=12, fontweight="bold")
@@ -134,8 +134,8 @@ def plot_speedup(results: dict) -> None:
     ax.set_yticklabels([l for _, l in step_label_positions], fontsize=10, fontweight="bold")
 
     ax.set_xscale("log")
-    ax.set_xlabel("Speedup (Atlas / EinsteinPy)", fontsize=11)
-    ax.set_title("Atlas Speedup over EinsteinPy", fontsize=14, fontweight="bold")
+    ax.set_xlabel("Speedup (Gravica / EinsteinPy)", fontsize=11)
+    ax.set_title("Gravica Speedup over EinsteinPy", fontsize=14, fontweight="bold")
     ax.axvline(x=1, color="gray", linestyle="--", linewidth=0.8, zorder=2)
     ax.grid(axis="x", alpha=0.3, zorder=0)
     ax.set_axisbelow(True)
@@ -200,7 +200,7 @@ def plot_summary_table(results: dict) -> None:
                 color = "black" if val < 500 else "white"
             ax.text(j, i, text, ha="center", va="center", fontsize=11, fontweight="bold", color=color)
 
-    ax.set_title("Speedup: Atlas over EinsteinPy\n(higher = Atlas is faster)", fontsize=13, fontweight="bold")
+    ax.set_title("Speedup: Gravica over EinsteinPy\n(higher = Gravica is faster)", fontsize=13, fontweight="bold")
     cbar = fig.colorbar(im, ax=ax, label="Speedup factor", shrink=0.8)
     cbar.set_label("Speedup (log scale)", fontsize=10)
 

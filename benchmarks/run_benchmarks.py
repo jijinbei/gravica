@@ -1,4 +1,4 @@
-"""Performance benchmarks: Atlas (Symbolica) vs EinsteinPy (SymPy).
+"""Performance benchmarks: Gravica (Symbolica) vs EinsteinPy (SymPy).
 
 Usage: uv run python benchmarks/run_benchmarks.py
 """
@@ -33,21 +33,21 @@ def _sympy_flrw():
 # ── Benchmark runners ──────────────────────────────────────────────
 
 def bench_atlas(metric_name: str) -> dict:
-    """Run Atlas benchmarks for a given metric."""
-    from atlas.christoffel import ChristoffelSymbols
-    from atlas.riemann import RiemannTensor
-    from atlas.ricci import RicciTensor, ricci_scalar
-    from atlas.einstein import EinsteinTensor
-    from atlas.weyl import WeylTensor
+    """Run Gravica benchmarks for a given metric."""
+    from gravica.christoffel import ChristoffelSymbols
+    from gravica.riemann import RiemannTensor
+    from gravica.ricci import RicciTensor, ricci_scalar
+    from gravica.einstein import EinsteinTensor
+    from gravica.weyl import WeylTensor
 
     if metric_name == "schwarzschild":
-        from atlas.metrics.schwarzschild import schwarzschild
+        from gravica.metrics.schwarzschild import schwarzschild
         m = schwarzschild()
     elif metric_name == "minkowski":
-        from atlas.metrics.minkowski import minkowski
+        from gravica.metrics.minkowski import minkowski
         m = minkowski()
     elif metric_name == "flrw":
-        from atlas.metrics.flrw import flrw
+        from gravica.metrics.flrw import flrw
         m = flrw()
     else:
         raise ValueError(f"Unknown metric: {metric_name}")
@@ -191,11 +191,11 @@ def run_single(metric_name: str) -> dict:
     print(f"  Benchmarking: {metric_name}")
     print(f"{'='*60}")
 
-    # Atlas
+    # Gravica
     atlas_runs = []
     for i in range(3):
         if i == 0:
-            print(f"  Atlas warmup...", end="", flush=True)
+            print(f"  Gravica warmup...", end="", flush=True)
         r = bench_atlas(metric_name)
         if i == 0:
             print(" done")
@@ -221,7 +221,7 @@ def run_single(metric_name: str) -> dict:
         epy_median = statistics.median(epy_times) if epy_times else None
 
         result[step] = {
-            'atlas': atlas_median,
+            'gravica': atlas_median,
             'einsteinpy': epy_median,
             'speedup': epy_median / atlas_median if epy_median and atlas_median > 0 else None,
         }
@@ -257,14 +257,14 @@ def main():
     print("RESULTS")
     print(f"{'='*80}\n")
 
-    print("| Computation | Metric | Atlas | EinsteinPy | Speedup |")
+    print("| Computation | Metric | Gravica | EinsteinPy | Speedup |")
     print("|---|---|---|---|---|")
 
     for step in steps:
         for metric_name in metrics:
             r = all_results.get(metric_name, {}).get(step, {})
-            if isinstance(r, dict) and 'atlas' in r:
-                atlas_t = format_time(r['atlas'])
+            if isinstance(r, dict) and 'gravica' in r:
+                atlas_t = format_time(r['gravica'])
                 epy_t = format_time(r['einsteinpy'])
                 speedup = f"{r['speedup']:.1f}x" if r.get('speedup') else "N/A"
                 print(f"| {step} | {metric_name} | {atlas_t} | {epy_t} | {speedup} |")

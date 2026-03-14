@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from symbolica import Expression
 
-from atlas.simplify import simplify, str_is_zero
+from gravica.simplify import simplify, str_is_zero
 
 # Type alias: a 4x4 (or NxN) grid of Expressions
 Grid = list[list[Expression]]

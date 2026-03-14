@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from symbolica import Expression
 
-from atlas.riemann import RiemannTensor
-from atlas.metric import MetricTensor, ZERO
-from atlas.simplify import simplify, str_is_zero
+from gravica.riemann import RiemannTensor
+from gravica.metric import MetricTensor, ZERO
+from gravica.simplify import simplify, str_is_zero
 
 
 class RicciTensor:

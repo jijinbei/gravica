@@ -2,18 +2,18 @@
 
 import pytest
 from symbolica import Expression
-from atlas.metric import MetricTensor
-from atlas.christoffel import ChristoffelSymbols
-from atlas.riemann import RiemannTensor
-from atlas.ricci import RicciTensor
-from atlas.einstein import EinsteinTensor
-from atlas.weyl import WeylTensor
-from atlas.simplify import simplify, str_is_zero
-from atlas.metrics.minkowski import minkowski
-from atlas.metrics.schwarzschild import schwarzschild
-from atlas.metrics.flrw import flrw
-from atlas.metrics.kerr import kerr
-from atlas.metrics.godel import godel
+from gravica.metric import MetricTensor
+from gravica.christoffel import ChristoffelSymbols
+from gravica.riemann import RiemannTensor
+from gravica.ricci import RicciTensor
+from gravica.einstein import EinsteinTensor
+from gravica.weyl import WeylTensor
+from gravica.simplify import simplify, str_is_zero
+from gravica.metrics.minkowski import minkowski
+from gravica.metrics.schwarzschild import schwarzschild
+from gravica.metrics.flrw import flrw
+from gravica.metrics.kerr import kerr
+from gravica.metrics.godel import godel
 
 
 def assert_zero(expr, msg=""):

@@ -1,6 +1,6 @@
 """Tests for Kerr metric."""
 
-from atlas.simplify import simplify
+from gravica.simplify import simplify
 from symbolica import Expression, S
 from conftest import check_inverse_identity, assert_zero
 
@@ -18,7 +18,7 @@ def test_kerr_reduces_to_schwarzschild(kerr_metric):
     """Setting a=0 in Kerr should give Schwarzschild metric components."""
     a_sym = S('a')
     zero = Expression.num(0)
-    from atlas.metrics.schwarzschild import schwarzschild
+    from gravica.metrics.schwarzschild import schwarzschild
     schw = schwarzschild()
 
     for i in range(4):

@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from symbolica import Expression
 
-from atlas.christoffel import ChristoffelSymbols
-from atlas.metric import ZERO
-from atlas.simplify import simplify, str_is_zero
+from gravica.christoffel import ChristoffelSymbols
+from gravica.metric import ZERO
+from gravica.simplify import simplify, str_is_zero
 
 
 class RiemannTensor:

@@ -1,6 +1,6 @@
 """Tests for Riemann curvature tensor."""
 
-from atlas.simplify import simplify, str_is_zero
+from gravica.simplify import simplify, str_is_zero
 from conftest import assert_zero
 
 

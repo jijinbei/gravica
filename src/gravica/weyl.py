@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from symbolica import Expression
 
-from atlas.riemann import RiemannTensor
-from atlas.ricci import RicciTensor, ricci_scalar
-from atlas.metric import ZERO
-from atlas.simplify import simplify
+from gravica.riemann import RiemannTensor
+from gravica.ricci import RicciTensor, ricci_scalar
+from gravica.metric import ZERO
+from gravica.simplify import simplify
 
 
 class WeylTensor:

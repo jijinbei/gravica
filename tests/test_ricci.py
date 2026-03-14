@@ -1,7 +1,7 @@
 """Tests for Ricci tensor and scalar."""
 
-from atlas.ricci import ricci_scalar
-from atlas.simplify import str_is_zero
+from gravica.ricci import ricci_scalar
+from gravica.simplify import str_is_zero
 from conftest import assert_zero
 
 

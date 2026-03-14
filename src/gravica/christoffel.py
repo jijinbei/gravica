@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from symbolica import Expression
 
-from atlas.metric import MetricTensor, Grid, ZERO
-from atlas.simplify import simplify, str_is_zero
+from gravica.metric import MetricTensor, Grid, ZERO
+from gravica.simplify import simplify, str_is_zero
 
 
 class ChristoffelSymbols:

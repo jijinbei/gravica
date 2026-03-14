@@ -1,6 +1,6 @@
 """Tests for Weyl tensor."""
 
-from atlas.simplify import str_is_zero
+from gravica.simplify import str_is_zero
 
 
 def test_minkowski_weyl_zero(mink_weyl):

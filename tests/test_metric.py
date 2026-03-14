@@ -1,7 +1,7 @@
 """Tests for metric tensor operations."""
 
-from atlas.metric import MetricTensor, symbolic_det, symbolic_inverse
-from atlas.simplify import simplify, is_zero
+from gravica.metric import MetricTensor, symbolic_det, symbolic_inverse
+from gravica.simplify import simplify, is_zero
 from conftest import check_inverse_identity
 
 

@@ -2,7 +2,7 @@
 
 from symbolica import Expression, S
 
-from atlas.metric import MetricTensor, ZERO
+from gravica.metric import MetricTensor, ZERO
 
 ONE = Expression.num(1)
 NEG = Expression.num(-1)
