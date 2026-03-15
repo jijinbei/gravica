@@ -102,7 +102,7 @@ MetricTensor → ChristoffelSymbols → RiemannTensor → RicciTensor → Einste
 ## Tests
 
 ```bash
-uv run pytest tests/ -v
+uv run pytest
 ```
 
 Verified properties:

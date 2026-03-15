@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 uv sync                                        # install deps
-uv run pytest tests/ -v                        # all tests
-uv run pytest tests/test_riemann.py -v         # single file
+uv run pytest                                  # all tests (tests/ -v by default)
+uv run pytest tests/test_riemann.py            # single file
 uv run pytest tests/test_riemann.py::test_foo  # single test
 uv run benchmarks/run_benchmarks.py            # run benchmarks
 uv run benchmarks/plot_benchmarks.py           # generate charts

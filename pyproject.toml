@@ -24,6 +24,10 @@ docs = [
     "sphinx-autodoc-typehints",
 ]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
