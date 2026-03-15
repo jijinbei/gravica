@@ -70,6 +70,7 @@ _register_table_config("RiemannTensor", "R", "riemann")
 _register_table_config("RicciTensor", "R", "sub")
 _register_table_config("EinsteinTensor", "G", "sub")
 _register_table_config("WeylTensor", "C", "riemann")
+_register_table_config("SchoutenTensor", "S", "sub")
 
 
 # --- Unified public API ---
@@ -88,7 +89,7 @@ def nonzero_components(tensor, coord_names):
     cls_name = type(tensor).__name__
     if cls_name == "MetricTensor":
         return _nonzero_components_2d(tensor, coord_names, symmetric=True)
-    elif cls_name in ("RicciTensor", "EinsteinTensor"):
+    elif cls_name in ("RicciTensor", "EinsteinTensor", "SchoutenTensor"):
         return _nonzero_components_2d(tensor, coord_names, symmetric=False)
     elif cls_name == "ChristoffelSymbols":
         return _nonzero_components_3d(tensor, coord_names)
