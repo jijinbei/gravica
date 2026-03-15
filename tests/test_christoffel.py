@@ -29,7 +29,8 @@ def test_schwarzschild_known_values(schw_christoffel):
     """Check known Schwarzschild Christoffel symbols."""
     ch = schw_christoffel
     from symbolica import S, Expression
-    r, r_s = S('r'), S('r_s')
+
+    r, r_s = S("r"), S("r_s")
 
     # Γ^r_{tt} = r_s(r - r_s) / (2r³)
     gamma_r_tt = ch[1, 0, 0]

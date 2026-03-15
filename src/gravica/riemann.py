@@ -49,10 +49,9 @@ class RiemannTensor:
                 for c in range(n):
                     for d in range(c + 1, n):  # Antisymmetric in c,d
                         # ∂_c Γ^a_{db} - ∂_d Γ^a_{cb}
-                        val = (
-                            gamma[a][d][b].derivative(coords[c])
-                            - gamma[a][c][b].derivative(coords[d])
-                        )
+                        val = gamma[a][d][b].derivative(coords[c]) - gamma[a][c][
+                            b
+                        ].derivative(coords[d])
 
                         # + Γ^a_{ce} Γ^e_{db} - Γ^a_{de} Γ^e_{cb}
                         for e in range(n):
@@ -69,7 +68,9 @@ class RiemannTensor:
                         val = simplify(val)
                         self._components[a][b][c][d] = val
                         # Antisymmetric: R^a_{bdc} = -R^a_{bcd}
-                        self._components[a][b][d][c] = simplify(Expression.num(-1) * val)
+                        self._components[a][b][d][c] = simplify(
+                            Expression.num(-1) * val
+                        )
 
     def __getitem__(self, idx: tuple[int, int, int, int]) -> Expression:
         r""":math:`R^a_{\ bcd}` = ``riemann[a, b, c, d]``."""
@@ -96,8 +97,10 @@ class RiemannTensor:
                         if str_is_zero(r_efgh):
                             continue
                         val = val + (
-                            g_inv[a][e] * g_inv[b][f]
-                            * g_inv[c][g] * g_inv[d][h]
+                            g_inv[a][e]
+                            * g_inv[b][f]
+                            * g_inv[c][g]
+                            * g_inv[d][h]
                             * r_efgh
                         )
         return simplify(val)

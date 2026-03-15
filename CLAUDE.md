@@ -13,6 +13,7 @@ uv run benchmarks/run_benchmarks.py            # run benchmarks
 uv run benchmarks/plot_benchmarks.py           # generate charts
 uv run ruff check .                            # lint (ruff)
 uv run ruff check . --fix                      # auto-fix lint warnings
+uv run ruff format .                           # format (ruff)
 uv build                                       # build dist/
 uv run twine upload --repository testpypi dist/* # publish to TestPyPI
 uv run twine upload dist/*                     # publish to PyPI

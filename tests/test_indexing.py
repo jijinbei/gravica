@@ -54,6 +54,4 @@ def test_fully_contravariant_minkowski(mink_riemann):
             for c in range(n):
                 for d in range(c + 1, n):
                     val = mink_riemann.fully_contravariant(a, b, c, d)
-                    assert str_is_zero(val), (
-                        f"R^{{{a}{b}{c}{d}}} = {val}, expected 0"
-                    )
+                    assert str_is_zero(val), f"R^{{{a}{b}{c}{d}}} = {val}, expected 0"

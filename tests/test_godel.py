@@ -42,16 +42,16 @@ def test_godel_ricci_scalar_constant(godel_ricci, godel_metric):
     R_str = str(R)
     assert R_str != "0", f"Ricci scalar should be nonzero for Gödel, got {R_str}"
 
-    x_sym = S('x')
-    a_sym = S('a')
-    exp_sym = S('exp')
+    x_sym = S("x")
+    a_sym = S("a")
+    exp_sym = S("exp")
 
     # Replace exp(2*x) -> exp(x)^2 (mathematically identical)
     e2x = exp_sym(Expression.num(2) * x_sym)
     ex2 = exp_sym(x_sym) ** 2
     R_simplified = simplify(R.replace(e2x, ex2))
 
-    expected = Expression.num(1) / a_sym ** 2
+    expected = Expression.num(1) / a_sym**2
     assert_zero(
         R_simplified - expected,
         f"Ricci scalar: got {R_simplified}, expected 1/a², diff={simplify(R_simplified - expected)}",

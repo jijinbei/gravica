@@ -38,6 +38,7 @@ def is_zero(expr: Expression, coords: tuple[Expression, ...] | None = None) -> b
 
     if coords is not None:
         import random
+
         random.seed(42)
         for _ in range(3):
             vals = {c: Expression.num(random.randint(2, 97)) for c in coords}

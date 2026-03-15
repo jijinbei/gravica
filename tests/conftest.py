@@ -37,7 +37,9 @@ def check_inverse_identity(metric: MetricTensor):
                 val = val + g[a][c] * g_inv[c][b]
             val = simplify(val)
             expected = "1" if a == b else "0"
-            assert str(val) == expected, f"g g^-1 [{a}][{b}] = {val}, expected {expected}"
+            assert str(val) == expected, (
+                f"g g^-1 [{a}][{b}] = {val}, expected {expected}"
+            )
 
 
 @pytest.fixture(scope="session")
@@ -102,6 +104,7 @@ def schw_weyl(schw_riemann, schw_ricci):
 
 # --- FLRW ---
 
+
 @pytest.fixture(scope="session")
 def flrw_metric():
     return flrw()
@@ -129,12 +132,14 @@ def flrw_einstein(flrw_ricci):
 
 # --- Kerr ---
 
+
 @pytest.fixture(scope="session")
 def kerr_metric():
     return kerr()
 
 
 # --- Gödel ---
+
 
 @pytest.fixture(scope="session")
 def godel_metric():
@@ -157,6 +162,7 @@ def godel_ricci(godel_riemann):
 
 
 # --- Reissner-Nordström ---
+
 
 @pytest.fixture(scope="session")
 def rn_metric():
@@ -185,6 +191,7 @@ def rn_einstein(rn_ricci):
 
 # --- de Sitter ---
 
+
 @pytest.fixture(scope="session")
 def ds_metric():
     return de_sitter()
@@ -206,6 +213,7 @@ def ds_ricci(ds_riemann):
 
 
 # --- anti-de Sitter ---
+
 
 @pytest.fixture(scope="session")
 def ads_metric():

@@ -20,9 +20,10 @@ def kretschner_scalar(riemann: RiemannTensor) -> Expression:
 
     # Precompute R_{abcd} (fully covariant)
     R_cov = [
-        [[[riemann.fully_covariant(a, b, c, d) for d in range(n)]
-          for c in range(n)]
-         for b in range(n)]
+        [
+            [[riemann.fully_covariant(a, b, c, d) for d in range(n)] for c in range(n)]
+            for b in range(n)
+        ]
         for a in range(n)
     ]
 

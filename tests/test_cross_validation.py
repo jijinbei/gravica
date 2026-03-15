@@ -18,12 +18,20 @@ from gravica.ricci import RicciTensor
 
 def _atlas_to_sympy(expr_str: str) -> sympy.Expr:
     """Convert an Atlas/Symbolica expression string to SymPy."""
-    t, r, theta, phi, r_s = symbols('t r theta phi r_s')
-    ns = {'t': t, 'r': r, 'theta': theta, 'phi': phi, 'r_s': r_s, 'sin': sympy.sin, 'cos': sympy.cos}
+    t, r, theta, phi, r_s = symbols("t r theta phi r_s")
+    ns = {
+        "t": t,
+        "r": r,
+        "theta": theta,
+        "phi": phi,
+        "r_s": r_s,
+        "sin": sympy.sin,
+        "cos": sympy.cos,
+    }
 
     s = expr_str
     # Symbolica uses ^ for power, SymPy uses **
-    s = s.replace('^', '**')
+    s = s.replace("^", "**")
     try:
         return sympy.sympify(s, locals=ns)
     except Exception:
@@ -33,15 +41,15 @@ def _atlas_to_sympy(expr_str: str) -> sympy.Expr:
 @pytest.fixture(scope="module")
 def epy_schwarzschild():
     """EinsteinPy Schwarzschild metric and derived tensors."""
-    t, r, theta, phi = symbols('t r theta phi')
-    r_s = symbols('r_s')
+    t, r, theta, phi = symbols("t r theta phi")
+    r_s = symbols("r_s")
     f = 1 - r_s / r
-    g = diag(f, -1 / f, -r**2, -r**2 * sin(theta)**2).tolist()
+    g = diag(f, -1 / f, -(r**2), -(r**2) * sin(theta) ** 2).tolist()
     metric = EPyMetric(g, (t, r, theta, phi))
     ch = EPyChristoffel.from_metric(metric)
     riem = EPyRiemann.from_christoffels(ch)
     ric = EPyRicci.from_riemann(riem)
-    return {'metric': metric, 'christoffel': ch, 'riemann': riem, 'ricci': ric}
+    return {"metric": metric, "christoffel": ch, "riemann": riem, "ricci": ric}
 
 
 @pytest.fixture(scope="module")
@@ -51,14 +59,14 @@ def atlas_schwarzschild():
     ch = ChristoffelSymbols(m)
     riem = RiemannTensor(ch)
     ric = RicciTensor(riem)
-    return {'metric': m, 'christoffel': ch, 'riemann': riem, 'ricci': ric}
+    return {"metric": m, "christoffel": ch, "riemann": riem, "ricci": ric}
 
 
 def test_christoffel_cross_validation(atlas_schwarzschild, epy_schwarzschild):
     """Compare Christoffel symbols between Atlas and EinsteinPy."""
-    atlas_ch = atlas_schwarzschild['christoffel']
-    epy_ch = epy_schwarzschild['christoffel']
-    r_s, r, theta = symbols('r_s r theta')
+    atlas_ch = atlas_schwarzschild["christoffel"]
+    epy_ch = epy_schwarzschild["christoffel"]
+    r_s, r, theta = symbols("r_s r theta")
 
     for a in range(4):
         for b in range(4):
@@ -73,8 +81,8 @@ def test_christoffel_cross_validation(atlas_schwarzschild, epy_schwarzschild):
 
 def test_ricci_cross_validation(atlas_schwarzschild, epy_schwarzschild):
     """Both should give R_{ab} = 0 for Schwarzschild."""
-    atlas_ric = atlas_schwarzschild['ricci']
-    epy_ric = epy_schwarzschild['ricci']
+    atlas_ric = atlas_schwarzschild["ricci"]
+    epy_ric = epy_schwarzschild["ricci"]
 
     for a in range(4):
         for b in range(a, 4):

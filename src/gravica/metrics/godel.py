@@ -24,9 +24,9 @@ def godel() -> MetricTensor:
 
     Uses ``exp`` as a symbolic function: :math:`\exp(x) = e^x`.
     """
-    t, x, y, z = S('t'), S('x'), S('y'), S('z')
-    a = S('a')
-    exp = S('exp')
+    t, x, y, z = S("t"), S("x"), S("y"), S("z")
+    a = S("a")
+    exp = S("exp")
 
     ex = exp(x)
     e2x = exp(TWO * x)

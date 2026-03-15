@@ -20,9 +20,9 @@ def test_rn_inverse(rn_metric):
 
 def test_rn_reduces_to_schwarzschild(rn_metric):
     """When r_Q → 0, should reduce to Schwarzschild."""
-    r = S('r')
-    r_s = S('r_s')
-    r_Q = S('r_Q')
+    r = S("r")
+    r_s = S("r_s")
+    r_Q = S("r_Q")
 
     g_tt = rn_metric[0, 0]
     # Replace r_Q with 0

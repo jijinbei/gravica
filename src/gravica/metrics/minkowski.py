@@ -15,7 +15,7 @@ def minkowski() -> MetricTensor:
 
         \eta_{ab} = \operatorname{diag}(1,\,-1,\,-1,\,-1)
     """
-    t, x, y, z = S('t'), S('x'), S('y'), S('z')
+    t, x, y, z = S("t"), S("x"), S("y"), S("z")
     g = [
         [ONE, ZERO, ZERO, ZERO],
         [ZERO, NEG, ZERO, ZERO],

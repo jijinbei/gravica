@@ -46,17 +46,13 @@ class SchoutenTensor:
             raise ValueError("Schouten tensor is only defined for dimension >= 3")
 
         coeff = Expression.num(1) / Expression.num(n - 2)
-        scalar_coeff = Expression.num(1) / (
-            Expression.num(2) * Expression.num(n - 1)
-        )
+        scalar_coeff = Expression.num(1) / (Expression.num(2) * Expression.num(n - 1))
 
         self._components = [[ZERO for _ in range(n)] for _ in range(n)]
 
         for a in range(n):
             for b in range(a, n):  # Symmetric
-                val = simplify(
-                    coeff * (R[a, b] - scalar_coeff * R_scalar * g[a][b])
-                )
+                val = simplify(coeff * (R[a, b] - scalar_coeff * R_scalar * g[a][b]))
                 self._components[a][b] = val
                 self._components[b][a] = val
 

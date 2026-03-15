@@ -25,6 +25,7 @@ def test_schouten_schwarzschild(schw_ricci):
 def test_schouten_symmetric(ds_ricci):
     """Schouten tensor should be symmetric: S_ab = S_ba."""
     from gravica.simplify import simplify
+
     S = SchoutenTensor(ds_ricci)
     n = S.dim
     for a in range(n):

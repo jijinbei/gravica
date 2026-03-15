@@ -28,10 +28,10 @@ def test_friedmann_first_equation(flrw_einstein):
     Multiplying both sides by a² gives:
         G_{00} · a² - 3(ȧ² + k) = 0.
     """
-    t = S('t')
-    k = S('k')
-    a = S('a')(t)
-    da = a.derivative(t)       # ȧ = der(1, a(t))
+    t = S("t")
+    k = S("k")
+    a = S("a")(t)
+    da = a.derivative(t)  # ȧ = der(1, a(t))
 
     G_00 = flrw_einstein[0, 0]
     lhs = G_00 * a**2 - Expression.num(3) * (da**2 + k)
@@ -44,12 +44,12 @@ def test_friedmann_acceleration_equation(flrw_einstein):
     This is the spatial component that, combined with G_{00},
     yields the acceleration equation ä/a = -4πG(ρ + 3p)/3.
     """
-    t = S('t')
-    r = S('r')
-    k = S('k')
-    a = S('a')(t)
-    da = a.derivative(t)       # ȧ
-    dda = da.derivative(t)     # ä = der(2, a(t))
+    t = S("t")
+    r = S("r")
+    k = S("k")
+    a = S("a")(t)
+    da = a.derivative(t)  # ȧ
+    dda = da.derivative(t)  # ä = der(2, a(t))
 
     G_11 = flrw_einstein[1, 1]
     # G_11 = (k + 2ä·a + ȧ²) / (-1 + kr²)
@@ -62,9 +62,9 @@ def test_friedmann_acceleration_equation(flrw_einstein):
 
 def test_friedmann_ricci_scalar(flrw_ricci):
     r"""R = -6(ä·a + ȧ² + k) / a²."""
-    t = S('t')
-    k = S('k')
-    a = S('a')(t)
+    t = S("t")
+    k = S("k")
+    a = S("a")(t)
     da = a.derivative(t)
     dda = da.derivative(t)
 
@@ -89,15 +89,13 @@ def test_friedmann_spatial_isotropy(flrw_einstein):
     G^1_1 = G^2_2 = G^3_3 = (2ä·a + ȧ² + k) / a².
     We verify G_{ii}/g_{ii} is the same for i = 1, 2, 3.
     """
-    t = S('t')
-    k = S('k')
-    a = S('a')(t)
+    t = S("t")
+    k = S("k")
+    a = S("a")(t)
     da = a.derivative(t)
     dda = da.derivative(t)
 
-    expected_mixed = (
-        Expression.num(2) * dda * a + da**2 + k
-    ) / a**2
+    expected_mixed = (Expression.num(2) * dda * a + da**2 + k) / a**2
 
     metric = flrw_einstein.metric
     for i in range(1, 4):
@@ -106,6 +104,4 @@ def test_friedmann_spatial_isotropy(flrw_einstein):
         # G^i_i = G_{ii} g^{ii} = G_{ii} / g_{ii}  (diagonal metric)
         mixed = simplify(G_ii / g_ii)
         diff = simplify(mixed - expected_mixed)
-        assert str_is_zero(diff), (
-            f"G^{i}_{i} = {mixed}, expected {expected_mixed}"
-        )
+        assert str_is_zero(diff), f"G^{i}_{i} = {mixed}, expected {expected_mixed}"

@@ -26,7 +26,7 @@ def test_stress_energy_schwarzschild(schw_einstein):
 
 def test_stress_energy_with_cosmological_constant(mink_einstein, mink):
     """With Λ, T_ab = Λ g_ab for flat spacetime (G_ab = 0)."""
-    Lambda = S('Lambda')
+    Lambda = S("Lambda")
     T = StressEnergyTensor(mink_einstein, cosmological_constant=Lambda)
     g = mink.components
     n = T.dim

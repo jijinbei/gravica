@@ -15,8 +15,8 @@ def test_kretschner_minkowski(mink_riemann):
 def test_kretschner_schwarzschild(schw_riemann):
     """Schwarzschild: K = 12 r_s^2 / r^6."""
     K = kretschner_scalar(schw_riemann)
-    r = S('r')
-    r_s = S('r_s')
+    r = S("r")
+    r_s = S("r_s")
     expected = Expression.num(12) * r_s**2 / r**6
     diff = simplify(K - expected)
     assert str_is_zero(diff), f"Expected 12*r_s^2/r^6, got {K}"

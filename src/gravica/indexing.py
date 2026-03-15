@@ -7,9 +7,7 @@ from gravica.metric import MetricTensor, Grid, ZERO
 from gravica.simplify import simplify, str_is_zero
 
 
-def raise_index_2d(
-    metric: MetricTensor, T_lower: Grid, which: int
-) -> Grid:
+def raise_index_2d(metric: MetricTensor, T_lower: Grid, which: int) -> Grid:
     r"""Raise one index of a rank-2 covariant tensor.
 
     Parameters
@@ -56,9 +54,7 @@ def raise_index_2d(
     return result
 
 
-def lower_index_2d(
-    metric: MetricTensor, T_upper: Grid, which: int
-) -> Grid:
+def lower_index_2d(metric: MetricTensor, T_upper: Grid, which: int) -> Grid:
     r"""Lower one index of a rank-2 contravariant tensor.
 
     Parameters

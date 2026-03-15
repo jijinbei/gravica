@@ -16,9 +16,10 @@ def test_kerr_not_diagonal(kerr_metric):
 
 def test_kerr_reduces_to_schwarzschild(kerr_metric):
     """Setting a=0 in Kerr should give Schwarzschild metric components."""
-    a_sym = S('a')
+    a_sym = S("a")
     zero = Expression.num(0)
     from gravica.metrics.schwarzschild import schwarzschild
+
     schw = schwarzschild()
 
     for i in range(4):
@@ -27,8 +28,8 @@ def test_kerr_reduces_to_schwarzschild(kerr_metric):
             kerr_comp = simplify(kerr_comp)
             schw_comp = schw[i, j]
             # Schwarzschild uses r_s, Kerr uses 2*M; substitute r_s = 2*M
-            r_s = S('r_s')
-            M = S('M')
+            r_s = S("r_s")
+            M = S("M")
             schw_sub = schw_comp.replace(r_s, Expression.num(2) * M)
             schw_sub = simplify(schw_sub)
             diff = simplify(kerr_comp - schw_sub)

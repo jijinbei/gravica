@@ -19,10 +19,10 @@ def kerr() -> MetricTensor:
         \Sigma = r^2 + a^2 \cos^2\theta, \qquad
         \Delta = r^2 - 2Mr + a^2
     """
-    t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
-    M, a = S('M'), S('a')
-    sin = S('sin')
-    cos = S('cos')
+    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    M, a = S("M"), S("a")
+    sin = S("sin")
+    cos = S("cos")
 
     sin_th = sin(theta)
     cos_th = cos(theta)

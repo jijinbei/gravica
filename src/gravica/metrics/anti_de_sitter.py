@@ -19,9 +19,9 @@ def anti_de_sitter() -> MetricTensor:
     Parameter: :math:`l` (AdS radius, related to cosmological constant
     :math:`\Lambda = -3/l^2`).
     """
-    t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
-    ads_l = S('l')
-    sin = S('sin')
+    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    ads_l = S("l")
+    sin = S("sin")
 
     f = ONE + r**2 / ads_l**2
 
@@ -29,6 +29,6 @@ def anti_de_sitter() -> MetricTensor:
         [f, ZERO, ZERO, ZERO],
         [ZERO, NEG / f, ZERO, ZERO],
         [ZERO, ZERO, NEG * r**2, ZERO],
-        [ZERO, ZERO, ZERO, NEG * r**2 * sin(theta)**2],
+        [ZERO, ZERO, ZERO, NEG * r**2 * sin(theta) ** 2],
     ]
     return MetricTensor(g, (t, r, theta, phi))

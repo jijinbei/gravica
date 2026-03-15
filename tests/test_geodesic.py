@@ -11,9 +11,7 @@ def test_geodesic_minkowski(mink_christoffel):
     # Each equation should be just the acceleration (free particle)
     for i, eq in enumerate(result.equations):
         diff = eq - result.accelerations[i]
-        assert str_is_zero(diff), (
-            f"Equation {i} should be just acceleration, got {eq}"
-        )
+        assert str_is_zero(diff), f"Equation {i} should be just acceleration, got {eq}"
 
 
 def test_geodesic_returns_correct_symbols(mink_christoffel):

@@ -32,7 +32,9 @@ def _nonzero_components_3d(christoffel, coord_names):
             for c in range(b, dim):
                 val = christoffel[a, b, c]
                 if not str_is_zero(val):
-                    label = f"^{{{coord_names[a]}}}_{{{coord_names[b]} {coord_names[c]}}}"
+                    label = (
+                        f"^{{{coord_names[a]}}}_{{{coord_names[b]} {coord_names[c]}}}"
+                    )
                     items.append((label, val))
     return items
 
@@ -90,7 +92,12 @@ def nonzero_components(tensor, coord_names):
     cls_name = type(tensor).__name__
     if cls_name == "MetricTensor":
         return _nonzero_components_2d(tensor, coord_names, symmetric=True)
-    elif cls_name in ("RicciTensor", "EinsteinTensor", "SchoutenTensor", "StressEnergyTensor"):
+    elif cls_name in (
+        "RicciTensor",
+        "EinsteinTensor",
+        "SchoutenTensor",
+        "StressEnergyTensor",
+    ):
         return _nonzero_components_2d(tensor, coord_names, symmetric=False)
     elif cls_name == "ChristoffelSymbols":
         return _nonzero_components_3d(tensor, coord_names)
@@ -146,6 +153,7 @@ def components_table(items, tensor=None, *, tensor_symbol=None, index_style=None
             tex = f"${tensor_symbol}{label}$"
         if hasattr(val, "to_latex"):
             from gravica.simplify import simplify
+
             val_latex = simplify(val).to_latex().removeprefix("$$").removesuffix("$$")
         else:
             val_latex = str(val)

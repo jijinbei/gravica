@@ -19,10 +19,10 @@ def flrw() -> MetricTensor:
 
     Parameters: :math:`k` (spatial curvature), :math:`a(t)` (scale factor).
     """
-    t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
-    k = S('k')
-    a_sym = S('a')
-    sin = S('sin')
+    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    k = S("k")
+    a_sym = S("a")
+    sin = S("sin")
 
     a = a_sym(t)  # a(t) — scale factor as a function of t
     a2 = a**2
@@ -31,6 +31,6 @@ def flrw() -> MetricTensor:
         [ONE, ZERO, ZERO, ZERO],
         [ZERO, NEG * a2 / (ONE - k * r**2), ZERO, ZERO],
         [ZERO, ZERO, NEG * a2 * r**2, ZERO],
-        [ZERO, ZERO, ZERO, NEG * a2 * r**2 * sin(theta)**2],
+        [ZERO, ZERO, ZERO, NEG * a2 * r**2 * sin(theta) ** 2],
     ]
     return MetricTensor(g, (t, r, theta, phi))

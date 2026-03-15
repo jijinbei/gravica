@@ -50,7 +50,12 @@ def plot_time_comparison(results: dict) -> None:
     metrics = list(METRIC_LABELS.keys())
 
     fig, axes = plt.subplots(1, 3, figsize=(16, 5), sharey=True)
-    fig.suptitle("Computation Time: Gravica (Symbolica) vs EinsteinPy (SymPy)", fontsize=14, fontweight="bold", y=1.02)
+    fig.suptitle(
+        "Computation Time: Gravica (Symbolica) vs EinsteinPy (SymPy)",
+        fontsize=14,
+        fontweight="bold",
+        y=1.02,
+    )
 
     for ax, metric in zip(axes, metrics):
         atlas_times = []
@@ -63,8 +68,22 @@ def plot_time_comparison(results: dict) -> None:
         x = np.arange(len(steps))
         width = 0.35
 
-        ax.bar(x - width / 2, atlas_times, width, label="Gravica", color=COLORS["gravica"], zorder=3)
-        ax.bar(x + width / 2, epy_times, width, label="EinsteinPy", color=COLORS["einsteinpy"], zorder=3)
+        ax.bar(
+            x - width / 2,
+            atlas_times,
+            width,
+            label="Gravica",
+            color=COLORS["gravica"],
+            zorder=3,
+        )
+        ax.bar(
+            x + width / 2,
+            epy_times,
+            width,
+            label="EinsteinPy",
+            color=COLORS["einsteinpy"],
+            zorder=3,
+        )
 
         ax.set_title(METRIC_LABELS[metric], fontsize=12, fontweight="bold")
         ax.set_xticks(x)
@@ -92,7 +111,11 @@ def plot_speedup(results: dict) -> None:
     y_labels = []
     colors = []
     speedups = []
-    metric_colors = {"minkowski": "#3B82F6", "schwarzschild": "#F59E0B", "flrw": "#10B981"}
+    metric_colors = {
+        "minkowski": "#3B82F6",
+        "schwarzschild": "#F59E0B",
+        "flrw": "#10B981",
+    }
 
     group_gap = 0.6
     bar_height = 0.25
@@ -110,27 +133,48 @@ def plot_speedup(results: dict) -> None:
                 y += bar_height + 0.05
         y += group_gap
 
-    bars = ax.barh(y_positions, speedups, height=bar_height, color=colors, zorder=3, edgecolor="white", linewidth=0.5)
+    bars = ax.barh(
+        y_positions,
+        speedups,
+        height=bar_height,
+        color=colors,
+        zorder=3,
+        edgecolor="white",
+        linewidth=0.5,
+    )
 
     # Add value labels
     for bar, sp in zip(bars, speedups):
         if sp >= 1:
             label = f"{sp:.0f}x" if sp >= 10 else f"{sp:.1f}x"
-            ax.text(bar.get_width() * 1.02, bar.get_y() + bar.get_height() / 2,
-                    label, va="center", fontsize=8, fontweight="bold")
+            ax.text(
+                bar.get_width() * 1.02,
+                bar.get_y() + bar.get_height() / 2,
+                label,
+                va="center",
+                fontsize=8,
+                fontweight="bold",
+            )
 
     # Add step group labels on the left
     y = 0
     step_label_positions = []
     for step in reversed(steps):
-        count = sum(1 for m in metrics if results[m][step].get("speedup") is not None and results[m][step]["speedup"] > 0)
+        count = sum(
+            1
+            for m in metrics
+            if results[m][step].get("speedup") is not None
+            and results[m][step]["speedup"] > 0
+        )
         if count > 0:
             mid = y + (count - 1) * (bar_height + 0.05) / 2
             step_label_positions.append((mid, STEP_LABELS[step].replace("\n", " ")))
             y += count * (bar_height + 0.05) + group_gap
 
     ax.set_yticks([p for p, _ in step_label_positions])
-    ax.set_yticklabels([label for _, label in step_label_positions], fontsize=10, fontweight="bold")
+    ax.set_yticklabels(
+        [label for _, label in step_label_positions], fontsize=10, fontweight="bold"
+    )
 
     ax.set_xscale("log")
     ax.set_xlabel("Speedup (Gravica / EinsteinPy)", fontsize=11)
@@ -141,7 +185,10 @@ def plot_speedup(results: dict) -> None:
 
     # Legend
     from matplotlib.patches import Patch
-    legend_elements = [Patch(facecolor=metric_colors[m], label=METRIC_LABELS[m]) for m in metrics]
+
+    legend_elements = [
+        Patch(facecolor=metric_colors[m], label=METRIC_LABELS[m]) for m in metrics
+    ]
     ax.legend(handles=legend_elements, loc="lower right", fontsize=10)
 
     fig.tight_layout()
@@ -169,12 +216,15 @@ def plot_summary_table(results: dict) -> None:
 
     # Use log scale for color mapping
     from matplotlib.colors import LogNorm
+
     valid = data_arr[~np.isnan(data_arr)]
     vmin = max(valid.min(), 0.1)
     vmax = valid.max()
 
     cmap = plt.cm.RdYlGn
-    im = ax.imshow(data_arr, cmap=cmap, norm=LogNorm(vmin=vmin, vmax=vmax), aspect="auto")
+    im = ax.imshow(
+        data_arr, cmap=cmap, norm=LogNorm(vmin=vmin, vmax=vmax), aspect="auto"
+    )
 
     ax.set_xticks(range(len(metrics)))
     ax.set_xticklabels([METRIC_LABELS[m] for m in metrics], fontsize=11)
@@ -197,9 +247,22 @@ def plot_summary_table(results: dict) -> None:
             else:
                 text = f"{val:.0f}x"
                 color = "black" if val < 500 else "white"
-            ax.text(j, i, text, ha="center", va="center", fontsize=11, fontweight="bold", color=color)
+            ax.text(
+                j,
+                i,
+                text,
+                ha="center",
+                va="center",
+                fontsize=11,
+                fontweight="bold",
+                color=color,
+            )
 
-    ax.set_title("Speedup: Gravica over EinsteinPy\n(higher = Gravica is faster)", fontsize=13, fontweight="bold")
+    ax.set_title(
+        "Speedup: Gravica over EinsteinPy\n(higher = Gravica is faster)",
+        fontsize=13,
+        fontweight="bold",
+    )
     cbar = fig.colorbar(im, ax=ax, label="Speedup factor", shrink=0.8)
     cbar.set_label("Speedup (log scale)", fontsize=10)
 

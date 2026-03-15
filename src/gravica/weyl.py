@@ -68,9 +68,7 @@ class WeylTensor:
                         )
 
                         # +1/((n-1)(n-2)) * R * (g_{ac} g_{db} - g_{ad} g_{cb})
-                        scalar_part = R_scalar * (
-                            g[a][c] * g[d][b] - g[a][d] * g[c][b]
-                        )
+                        scalar_part = R_scalar * (g[a][c] * g[d][b] - g[a][d] * g[c][b])
 
                         val = R_abcd - coeff1 * ricci_part + coeff2 * scalar_part
                         self._components[a][b][c][d] = simplify(val)

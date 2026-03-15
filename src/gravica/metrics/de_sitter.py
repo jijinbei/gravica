@@ -18,9 +18,9 @@ def de_sitter() -> MetricTensor:
 
     Parameter: :math:`\Lambda > 0` (cosmological constant).
     """
-    t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
-    Lambda = S('Lambda')
-    sin = S('sin')
+    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    Lambda = S("Lambda")
+    sin = S("sin")
 
     f = ONE - Lambda * r**2 / Expression.num(3)
 
@@ -28,6 +28,6 @@ def de_sitter() -> MetricTensor:
         [f, ZERO, ZERO, ZERO],
         [ZERO, NEG / f, ZERO, ZERO],
         [ZERO, ZERO, NEG * r**2, ZERO],
-        [ZERO, ZERO, ZERO, NEG * r**2 * sin(theta)**2],
+        [ZERO, ZERO, ZERO, NEG * r**2 * sin(theta) ** 2],
     ]
     return MetricTensor(g, (t, r, theta, phi))
