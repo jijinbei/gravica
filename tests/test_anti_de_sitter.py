@@ -4,7 +4,7 @@ from symbolica import Expression, S
 
 from gravica.ricci import ricci_scalar
 from gravica.simplify import simplify, str_is_zero
-from tests.conftest import assert_zero, check_inverse_identity
+from conftest import assert_zero, check_inverse_identity
 
 
 def test_ads_dimensions(ads_metric):
