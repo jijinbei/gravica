@@ -23,28 +23,7 @@ API reference: [https://site.jijinbei.jp/gravica/](https://site.jijinbei.jp/grav
 
 ## Quick Start
 
-```bash
-uv add gravica
-```
-
-```python
-from gravica.metrics.schwarzschild import schwarzschild
-from gravica.christoffel import ChristoffelSymbols
-from gravica.riemann import RiemannTensor
-from gravica.ricci import RicciTensor, ricci_scalar
-from gravica.einstein import EinsteinTensor
-
-metric = schwarzschild()
-christoffel = ChristoffelSymbols(metric)
-riemann = RiemannTensor(christoffel)
-ricci = RicciTensor(riemann)
-einstein = EinsteinTensor(ricci)
-
-# Verify vacuum solution: G_ab = 0
-for a in range(4):
-    for b in range(4):
-        assert str(einstein[a, b]) == "0"
-```
+See [tutorials/getting_started.ipynb](tutorials/getting_started.ipynb) for a step-by-step guide.
 
 ## Benchmarks: Gravica vs EinsteinPy
 
