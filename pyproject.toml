@@ -1,6 +1,6 @@
 [project]
 name = "gravica"
-version = "0.1.0"
+version = "0.1.1"
 description = "General Relativity computation library built on Symbolica"
 readme = "README.md"
 license = "MIT"
