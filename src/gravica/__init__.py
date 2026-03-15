@@ -4,6 +4,7 @@ from gravica.riemann import RiemannTensor
 from gravica.ricci import RicciTensor, ricci_scalar
 from gravica.einstein import EinsteinTensor
 from gravica.weyl import WeylTensor
+from gravica.kretschner import kretschner_scalar
 from gravica import display, check
 
 __all__ = [
@@ -14,6 +15,7 @@ __all__ = [
     "ricci_scalar",
     "EinsteinTensor",
     "WeylTensor",
+    "kretschner_scalar",
     "display",
     "check",
 ]
