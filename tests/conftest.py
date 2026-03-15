@@ -112,6 +112,21 @@ def flrw_christoffel(flrw_metric):
     return ChristoffelSymbols(flrw_metric)
 
 
+@pytest.fixture(scope="session")
+def flrw_riemann(flrw_christoffel):
+    return RiemannTensor(flrw_christoffel)
+
+
+@pytest.fixture(scope="session")
+def flrw_ricci(flrw_riemann):
+    return RicciTensor(flrw_riemann)
+
+
+@pytest.fixture(scope="session")
+def flrw_einstein(flrw_ricci):
+    return EinsteinTensor(flrw_ricci)
+
+
 # --- Kerr ---
 
 @pytest.fixture(scope="session")
