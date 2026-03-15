@@ -14,6 +14,9 @@ from gravica.metrics.schwarzschild import schwarzschild
 from gravica.metrics.flrw import flrw
 from gravica.metrics.kerr import kerr
 from gravica.metrics.godel import godel
+from gravica.metrics.reissner_nordstrom import reissner_nordstrom
+from gravica.metrics.de_sitter import de_sitter
+from gravica.metrics.anti_de_sitter import anti_de_sitter
 
 
 def assert_zero(expr, msg=""):
@@ -136,3 +139,74 @@ def godel_riemann(godel_christoffel):
 @pytest.fixture(scope="session")
 def godel_ricci(godel_riemann):
     return RicciTensor(godel_riemann)
+
+
+# --- Reissner-Nordström ---
+
+@pytest.fixture(scope="session")
+def rn_metric():
+    return reissner_nordstrom()
+
+
+@pytest.fixture(scope="session")
+def rn_christoffel(rn_metric):
+    return ChristoffelSymbols(rn_metric)
+
+
+@pytest.fixture(scope="session")
+def rn_riemann(rn_christoffel):
+    return RiemannTensor(rn_christoffel)
+
+
+@pytest.fixture(scope="session")
+def rn_ricci(rn_riemann):
+    return RicciTensor(rn_riemann)
+
+
+@pytest.fixture(scope="session")
+def rn_einstein(rn_ricci):
+    return EinsteinTensor(rn_ricci)
+
+
+# --- de Sitter ---
+
+@pytest.fixture(scope="session")
+def ds_metric():
+    return de_sitter()
+
+
+@pytest.fixture(scope="session")
+def ds_christoffel(ds_metric):
+    return ChristoffelSymbols(ds_metric)
+
+
+@pytest.fixture(scope="session")
+def ds_riemann(ds_christoffel):
+    return RiemannTensor(ds_christoffel)
+
+
+@pytest.fixture(scope="session")
+def ds_ricci(ds_riemann):
+    return RicciTensor(ds_riemann)
+
+
+# --- anti-de Sitter ---
+
+@pytest.fixture(scope="session")
+def ads_metric():
+    return anti_de_sitter()
+
+
+@pytest.fixture(scope="session")
+def ads_christoffel(ads_metric):
+    return ChristoffelSymbols(ads_metric)
+
+
+@pytest.fixture(scope="session")
+def ads_riemann(ads_christoffel):
+    return RiemannTensor(ads_christoffel)
+
+
+@pytest.fixture(scope="session")
+def ads_ricci(ads_riemann):
+    return RicciTensor(ads_riemann)
