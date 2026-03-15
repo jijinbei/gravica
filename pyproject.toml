@@ -15,6 +15,7 @@ dev = [
     "matplotlib>=3.10.8",
     "pytest>=9.0.2",
     "sympy>=1.14.0",
+    "twine>=6.2.0",
 ]
 
 [project.optional-dependencies]
