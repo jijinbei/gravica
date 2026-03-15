@@ -5,6 +5,7 @@ from gravica.ricci import RicciTensor, ricci_scalar
 from gravica.einstein import EinsteinTensor
 from gravica.weyl import WeylTensor
 from gravica.kretschner import kretschner_scalar
+from gravica.geodesic import geodesic_equations, GeodesicEquations
 from gravica import display, check
 
 __all__ = [
@@ -16,6 +17,8 @@ __all__ = [
     "EinsteinTensor",
     "WeylTensor",
     "kretschner_scalar",
+    "geodesic_equations",
+    "GeodesicEquations",
     "display",
     "check",
 ]
