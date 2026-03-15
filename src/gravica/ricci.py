@@ -10,7 +10,7 @@ from gravica.simplify import simplify, str_is_zero
 
 
 class RicciTensor:
-    """Ricci tensor R_{ab} = R^c_{acb}."""
+    r"""Ricci tensor :math:`R_{ab} = R^c_{\ acb}`."""
 
     def __init__(self, riemann: RiemannTensor):
         self.riemann = riemann
@@ -20,7 +20,7 @@ class RicciTensor:
 
     @property
     def components(self) -> list[list[Expression]]:
-        """R_{ab} indexed as [a][b]."""
+        r""":math:`R_{ab}` indexed as ``[a][b]``."""
         if self._components is None:
             self._compute()
         return self._components  # type: ignore
@@ -42,12 +42,12 @@ class RicciTensor:
                 self._components[b][a] = val
 
     def __getitem__(self, idx: tuple[int, int]) -> Expression:
-        """R_{ab} = ricci[a, b]."""
+        r""":math:`R_{ab}` = ``ricci[a, b]``."""
         return self.components[idx[0]][idx[1]]
 
 
 def ricci_scalar(ricci: RicciTensor) -> Expression:
-    """Ricci scalar R = g^{ab} R_{ab}."""
+    r"""Ricci scalar :math:`R = g^{ab}\,R_{ab}`."""
     g_inv = ricci.metric.inverse
     n = ricci.dim
     val = ZERO

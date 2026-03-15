@@ -10,7 +10,7 @@ from gravica.simplify import simplify
 
 
 class EinsteinTensor:
-    """Einstein tensor G_{ab} = R_{ab} - ½ g_{ab} R."""
+    r"""Einstein tensor :math:`G_{ab} = R_{ab} - \tfrac{1}{2}\,g_{ab}\,R`."""
 
     def __init__(self, ricci: RicciTensor):
         self.ricci = ricci
@@ -27,7 +27,7 @@ class EinsteinTensor:
 
     @property
     def components(self) -> list[list[Expression]]:
-        """G_{ab} indexed as [a][b]."""
+        r""":math:`G_{ab}` indexed as ``[a][b]``."""
         if self._components is None:
             self._compute()
         return self._components  # type: ignore
@@ -48,5 +48,5 @@ class EinsteinTensor:
                 self._components[b][a] = val
 
     def __getitem__(self, idx: tuple[int, int]) -> Expression:
-        """G_{ab} = einstein[a, b]."""
+        r""":math:`G_{ab}` = ``einstein[a, b]``."""
         return self.components[idx[0]][idx[1]]

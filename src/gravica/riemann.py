@@ -10,9 +10,14 @@ from gravica.simplify import simplify, str_is_zero
 
 
 class RiemannTensor:
-    """Riemann curvature tensor R^a_{bcd}.
+    r"""Riemann curvature tensor :math:`R^a_{\ bcd}`.
 
-    R^a_{bcd} = ∂_c Γ^a_{db} - ∂_d Γ^a_{cb} + Γ^a_{ce} Γ^e_{db} - Γ^a_{de} Γ^e_{cb}
+    .. math::
+
+        R^a_{\ bcd} = \partial_c\,\Gamma^a_{\ db}
+                     - \partial_d\,\Gamma^a_{\ cb}
+                     + \Gamma^a_{\ ce}\,\Gamma^e_{\ db}
+                     - \Gamma^a_{\ de}\,\Gamma^e_{\ cb}
     """
 
     def __init__(self, christoffel: ChristoffelSymbols):
@@ -24,7 +29,7 @@ class RiemannTensor:
 
     @property
     def components(self) -> list[list[list[list[Expression]]]]:
-        """R^a_{bcd} indexed as [a][b][c][d]."""
+        r""":math:`R^a_{\ bcd}` indexed as ``[a][b][c][d]``."""
         if self._components is None:
             self._compute()
         return self._components  # type: ignore
@@ -67,11 +72,11 @@ class RiemannTensor:
                         self._components[a][b][d][c] = simplify(Expression.num(-1) * val)
 
     def __getitem__(self, idx: tuple[int, int, int, int]) -> Expression:
-        """R^a_{bcd} = riemann[a, b, c, d]."""
+        r""":math:`R^a_{\ bcd}` = ``riemann[a, b, c, d]``."""
         return self.components[idx[0]][idx[1]][idx[2]][idx[3]]
 
     def fully_covariant(self, a: int, b: int, c: int, d: int) -> Expression:
-        """R_{abcd} = g_{ae} R^e_{bcd}."""
+        r""":math:`R_{abcd} = g_{ae}\,R^e_{\ bcd}`."""
         g = self.metric.components
         n = self.dim
         val = ZERO

@@ -11,11 +11,13 @@ from gravica.simplify import simplify
 
 
 class WeylTensor:
-    """Weyl tensor C_{abcd} (fully covariant).
+    r"""Weyl tensor :math:`C_{abcd}` (fully covariant).
 
-    C_{abcd} = R_{abcd}
-        - 2/(n-2) * (g_{a[c} R_{d]b} - g_{b[c} R_{d]a})
-        + 2/((n-1)(n-2)) * R * g_{a[c} g_{d]b}
+    .. math::
+
+        C_{abcd} = R_{abcd}
+            - \frac{2}{n-2}\bigl(g_{a[c}\,R_{d]b} - g_{b[c}\,R_{d]a}\bigr)
+            + \frac{2}{(n-1)(n-2)}\,R\;g_{a[c}\,g_{d]b}
     """
 
     def __init__(self, riemann: RiemannTensor, ricci: RicciTensor):
@@ -27,7 +29,7 @@ class WeylTensor:
 
     @property
     def components(self) -> list[list[list[list[Expression]]]]:
-        """C_{abcd} indexed as [a][b][c][d]."""
+        r""":math:`C_{abcd}` indexed as ``[a][b][c][d]``."""
         if self._components is None:
             self._compute()
         return self._components  # type: ignore
@@ -74,5 +76,5 @@ class WeylTensor:
                         self._components[a][b][c][d] = simplify(val)
 
     def __getitem__(self, idx: tuple[int, int, int, int]) -> Expression:
-        """C_{abcd} = weyl[a, b, c, d]."""
+        r""":math:`C_{abcd}` = ``weyl[a, b, c, d]``."""
         return self.components[idx[0]][idx[1]][idx[2]][idx[3]]

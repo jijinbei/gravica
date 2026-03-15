@@ -9,11 +9,16 @@ NEG = Expression.num(-1)
 
 
 def schwarzschild() -> MetricTensor:
-    """Schwarzschild metric ds² = (1-r_s/r)dt² - (1-r_s/r)^{-1}dr² - r²dΩ².
+    r"""Schwarzschild metric in coordinates :math:`(t, r, \theta, \varphi)`.
 
-    Uses rational form (r-r_s)/r for better symbolic cancellation.
-    Coordinates: (t, r, θ, φ)
-    Parameter: r_s = 2GM/c²
+    .. math::
+
+        ds^2 = \Bigl(1 - \frac{r_s}{r}\Bigr) dt^2
+             - \Bigl(1 - \frac{r_s}{r}\Bigr)^{-1} dr^2
+             - r^2\,d\Omega^2
+
+    Uses the rational form :math:`(r - r_s)/r` for better symbolic cancellation.
+    Parameter: :math:`r_s = 2GM/c^2`.
     """
     t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
     r_s = S('r_s')

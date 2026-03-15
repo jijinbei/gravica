@@ -76,13 +76,14 @@ _register_table_config("WeylTensor", "C", "riemann")
 
 
 def nonzero_components(tensor, coord_names):
-    """Return list of (label, value) for non-zero components, auto-dispatched by tensor type.
+    r"""Return list of (label, value) for non-zero components, auto-dispatched by tensor type.
 
     Dispatches based on tensor class:
-    - MetricTensor → rank-2, symmetric
-    - RicciTensor, EinsteinTensor → rank-2, non-symmetric
-    - ChristoffelSymbols → rank-3
-    - RiemannTensor, WeylTensor → rank-4
+
+    - :class:`~gravica.metric.MetricTensor` -- rank-2, symmetric
+    - :class:`~gravica.ricci.RicciTensor`, :class:`~gravica.einstein.EinsteinTensor` -- rank-2, non-symmetric
+    - :class:`~gravica.christoffel.ChristoffelSymbols` -- rank-3
+    - :class:`~gravica.riemann.RiemannTensor`, :class:`~gravica.weyl.WeylTensor` -- rank-4
     """
     cls_name = type(tensor).__name__
     if cls_name == "MetricTensor":
@@ -98,21 +99,21 @@ def nonzero_components(tensor, coord_names):
 
 
 def components_table(items, tensor=None, *, tensor_symbol=None, index_style=None):
-    """Format a list of (label, value) pairs as an IPython Markdown table.
+    r"""Format a list of (label, value) pairs as an IPython Markdown table.
 
     Parameters
     ----------
     items : list of (str, expression)
     tensor : tensor object, optional
-        If provided, tensor_symbol and index_style are inferred from its type.
+        If provided, *tensor_symbol* and *index_style* are inferred from its type.
     tensor_symbol : str, optional
-        The symbol for the tensor, e.g. "g", "\\Gamma", "R".
-        Used as fallback when tensor is None.
+        The symbol for the tensor, e.g. ``"g"``, ``"\\Gamma"``, ``"R"``.
+        Used as fallback when *tensor* is None.
     index_style : str, optional
-        "sub" for subscript labels like g_{tt},
-        "christoffel" for mixed like \\Gamma^a_{bc},
-        "riemann" for mixed like R^a{}_{bcd}.
-        Used as fallback when tensor is None.
+        ``"sub"`` for subscript labels like :math:`g_{tt}`,
+        ``"christoffel"`` for mixed like :math:`\Gamma^a_{\ bc}`,
+        ``"riemann"`` for mixed like :math:`R^a{}_{bcd}`.
+        Used as fallback when *tensor* is None.
     """
     from IPython.display import Markdown
 

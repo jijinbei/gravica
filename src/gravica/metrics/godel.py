@@ -10,12 +10,19 @@ TWO = Expression.num(2)
 
 
 def godel() -> MetricTensor:
-    """Gödel metric ds² = a²[dt² - dx² + (e^{2x}/2)dy² - dz² + 2e^x dt dy].
+    r"""Gödel metric in coordinates :math:`(t, x, y, z)`.
 
-    Coordinates: (t, x, y, z)
-    Parameter: a (related to angular velocity ω by a² = 1/(2ω²))
+    .. math::
 
-    Uses exp as a symbolic function: exp(x) = e^x.
+        ds^2 = a^2 \left[
+            dt^2 - dx^2 + \tfrac{1}{2}\,e^{2x}\,dy^2 - dz^2
+            + 2\,e^{x}\,dt\,dy
+        \right]
+
+    Parameter: :math:`a` (related to angular velocity :math:`\omega` by
+    :math:`a^2 = 1/(2\omega^2)`).
+
+    Uses ``exp`` as a symbolic function: :math:`\exp(x) = e^x`.
     """
     t, x, y, z = S('t'), S('x'), S('y'), S('z')
     a = S('a')

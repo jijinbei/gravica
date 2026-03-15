@@ -9,10 +9,17 @@ from gravica.simplify import simplify, str_is_zero
 
 
 class ChristoffelSymbols:
-    """Christoffel symbols computed from a metric tensor.
+    r"""Christoffel symbols computed from a metric tensor.
 
-    Γ_{abc} = ½(∂_b g_{ac} + ∂_c g_{ab} - ∂_a g_{bc})   (first kind)
-    Γ^a_{bc} = g^{ad} Γ_{dbc}                              (second kind)
+    .. math::
+
+        \Gamma_{abc} = \tfrac{1}{2}(\partial_b\, g_{ac} + \partial_c\, g_{ab} - \partial_a\, g_{bc})
+        \quad\text{(first kind)}
+
+    .. math::
+
+        \Gamma^a_{\ bc} = g^{ad}\,\Gamma_{dbc}
+        \quad\text{(second kind)}
     """
 
     def __init__(self, metric: MetricTensor):
@@ -24,14 +31,14 @@ class ChristoffelSymbols:
 
     @property
     def first_kind(self) -> list[list[list[Expression]]]:
-        """Γ_{abc} indexed as [a][b][c]."""
+        r""":math:`\Gamma_{abc}` indexed as ``[a][b][c]``."""
         if self._first is None:
             self._compute_first_kind()
         return self._first  # type: ignore
 
     @property
     def second_kind(self) -> list[list[list[Expression]]]:
-        """Γ^a_{bc} indexed as [a][b][c]."""
+        r""":math:`\Gamma^a_{\ bc}` indexed as ``[a][b][c]``."""
         if self._second is None:
             self._compute_second_kind()
         return self._second  # type: ignore
@@ -82,5 +89,5 @@ class ChristoffelSymbols:
                     self._second[a][c][b] = val  # Symmetric in b,c
 
     def __getitem__(self, idx: tuple[int, int, int]) -> Expression:
-        """Γ^a_{bc} = christoffel[a, b, c]."""
+        r""":math:`\Gamma^a_{\ bc}` = ``christoffel[a, b, c]``."""
         return self.second_kind[idx[0]][idx[1]][idx[2]]

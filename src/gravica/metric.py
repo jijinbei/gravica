@@ -66,14 +66,14 @@ def symbolic_inverse(matrix: Grid) -> Grid:
 
 
 class MetricTensor:
-    """A metric tensor g_{ab} for a given coordinate system.
+    r"""A metric tensor :math:`g_{ab}` for a given coordinate system.
 
     Parameters
     ----------
     components : Grid
         NxN symmetric matrix of Expression entries.
     coords : tuple of Expression
-        Coordinate symbols, e.g. (t, r, theta, phi).
+        Coordinate symbols, e.g. ``(t, r, theta, phi)``.
     """
 
     def __init__(self, components: Grid, coords: tuple[Expression, ...]):
@@ -87,23 +87,23 @@ class MetricTensor:
         self._det: Expression | None = None
 
     def __getitem__(self, idx: tuple[int, int]) -> Expression:
-        """g_{ab} = metric[a, b]."""
+        r""":math:`g_{ab}` = ``metric[a, b]``."""
         return self.components[idx[0]][idx[1]]
 
     @property
     def inverse(self) -> Grid:
-        """Compute g^{ab} (cached)."""
+        r"""Compute :math:`g^{ab}` (cached)."""
         if self._inverse is None:
             self._inverse = symbolic_inverse(self.components)
         return self._inverse
 
     def inv(self, a: int, b: int) -> Expression:
-        """g^{ab}."""
+        r""":math:`g^{ab}`."""
         return self.inverse[a][b]
 
     @property
     def det(self) -> Expression:
-        """det(g_{ab}) (cached)."""
+        r""":math:`\det(g_{ab})` (cached)."""
         if self._det is None:
             self._det = symbolic_det(self.components)
         return self._det

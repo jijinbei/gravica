@@ -17,6 +17,13 @@ dev = [
     "sympy>=1.14.0",
 ]
 
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "furo",
+    "sphinx-autodoc-typehints",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

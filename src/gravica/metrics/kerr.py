@@ -10,11 +10,14 @@ TWO = Expression.num(2)
 
 
 def kerr() -> MetricTensor:
-    """Kerr metric in Boyer-Lindquist coordinates (t, r, θ, φ).
+    r"""Kerr metric in Boyer--Lindquist coordinates :math:`(t, r, \theta, \varphi)`.
 
-    Parameters: M (mass), a (spin = J/M)
-    Σ = r² + a²cos²θ
-    Δ = r² - 2Mr + a²
+    Parameters: :math:`M` (mass), :math:`a = J/M` (spin).
+
+    .. math::
+
+        \Sigma = r^2 + a^2 \cos^2\theta, \qquad
+        \Delta = r^2 - 2Mr + a^2
     """
     t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
     M, a = S('M'), S('a')

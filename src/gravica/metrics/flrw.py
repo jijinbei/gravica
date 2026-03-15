@@ -9,10 +9,15 @@ NEG = Expression.num(-1)
 
 
 def flrw() -> MetricTensor:
-    """FLRW metric ds² = dt² - a(t)²[dr²/(1-kr²) + r²dΩ²].
+    r"""FLRW metric in coordinates :math:`(t, r, \theta, \varphi)`.
 
-    Coordinates: (t, r, θ, φ)
-    Parameters: k (curvature), a(t) (scale factor as function)
+    .. math::
+
+        ds^2 = dt^2 - a(t)^2 \left[
+            \frac{dr^2}{1 - k\,r^2} + r^2\,d\Omega^2
+        \right]
+
+    Parameters: :math:`k` (spatial curvature), :math:`a(t)` (scale factor).
     """
     t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
     k = S('k')

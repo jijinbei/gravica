@@ -15,7 +15,7 @@ def zero(tensor, simplify_fn):
 
 
 def antisymmetry(tensor, simplify_fn):
-    """Check T^a_{bcd} + T^a_{bdc} = 0 for all index combinations of a rank-4 tensor."""
+    r"""Check :math:`T^a_{\ bcd} + T^a_{\ bdc} = 0` for all index combinations of a rank-4 tensor."""
     n = tensor.dim
     for a in range(n):
         for b in range(n):
