@@ -10,6 +10,8 @@ objects from a metric tensor:
 .. code-block:: text
 
    MetricTensor → ChristoffelSymbols → RiemannTensor → RicciTensor → EinsteinTensor / WeylTensor
+                         ↓                   ↓              ↓              ↓
+                  GeodesicEquations   KretschnerScalar  SchoutenTensor  StressEnergyTensor
 
 .. toctree::
    :maxdepth: 2

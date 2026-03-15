@@ -10,6 +10,11 @@ API Reference
    ricci
    einstein
    weyl
+   schouten
+   kretschner
+   geodesic
+   stress_energy
+   indexing
    metrics
    display
    check

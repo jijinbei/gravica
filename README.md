@@ -7,7 +7,11 @@ Gravica computes the full GR tensor chain — from metric tensor to Einstein ten
 ## Features
 
 - Full GR computation chain: Metric → Christoffel → Riemann → Ricci → Einstein → Weyl
-- Built-in metrics: Minkowski, Schwarzschild, Kerr, FLRW
+- Curvature invariants: Kretschner scalar, Ricci scalar
+- Schouten tensor, Stress-Energy-Momentum tensor
+- Geodesic equation generator
+- Index raising/lowering utilities
+- Built-in metrics: Minkowski, Schwarzschild, Kerr, FLRW, Reissner-Nordström, de Sitter, anti-de Sitter, Gödel
 - Lazy evaluation with caching
 - Cross-validated against EinsteinPy
 
@@ -75,17 +79,25 @@ uv run benchmarks/plot_benchmarks.py   # Generate charts
 
 ```
 MetricTensor → ChristoffelSymbols → RiemannTensor → RicciTensor → EinsteinTensor
-                                                                 → WeylTensor
+                      ↓                   ↓              ↓       → WeylTensor
+               GeodesicEquations   KretschnerScalar  SchoutenTensor
+                                                              ↓
+                                                     StressEnergyTensor
 ```
 
 | Module | Computes |
 |---|---|
 | `metric.py` | $g_{ab}$, $g^{ab}$, $\det(g)$ |
 | `christoffel.py` | $\Gamma^a_{\ bc} = g^{ad}\,\tfrac{1}{2}(\partial_b\,g_{ac} + \partial_c\,g_{ab} - \partial_a\,g_{bc})$ |
-| `riemann.py` | $R^a_{\ bcd} = \partial_c\,\Gamma^a_{\ db} - \partial_d\,\Gamma^a_{\ cb} + \Gamma^a_{\ ce}\,\Gamma^e_{\ db} - \Gamma^a_{\ de}\,\Gamma^e_{\ cb}$ |
+| `riemann.py` | $R^a_{\ bcd}$, $R_{abcd}$, $R^{abcd}$ |
 | `ricci.py` | $R_{ab} = R^c_{\ acb}$, $R = g^{ab}\,R_{ab}$ |
 | `einstein.py` | $G_{ab} = R_{ab} - \tfrac{1}{2}\,g_{ab}\,R$ |
 | `weyl.py` | $C_{abcd}$ (Weyl conformal tensor) |
+| `kretschner.py` | $K = R_{abcd}\,R^{abcd}$ (Kretschner scalar) |
+| `geodesic.py` | $\ddot{x}^a + \Gamma^a_{\ bc}\,\dot{x}^b\,\dot{x}^c = 0$ |
+| `schouten.py` | $S_{ab} = \tfrac{1}{n-2}\bigl(R_{ab} - \tfrac{R\,g_{ab}}{2(n-1)}\bigr)$ |
+| `stress_energy.py` | $8\pi G\,T_{ab} = G_{ab} + \Lambda\,g_{ab}$ |
+| `indexing.py` | Index raising / lowering for rank-2 tensors |
 
 ## Tests
 
@@ -95,9 +107,12 @@ uv run pytest tests/ -v
 
 Verified properties:
 - **Minkowski**: All tensors $= 0$
-- **Schwarzschild**: $R_{ab} = 0$, $G_{ab} = 0$ (vacuum solution)
+- **Schwarzschild**: $R_{ab} = 0$, $G_{ab} = 0$ (vacuum), $K = 12\,r_s^2/r^6$
 - **Riemann symmetries**: $R^a_{\ bcd} = -R^a_{\ bdc}$
 - **Christoffel known values**: $\Gamma^r_{\ tt} = r_s(r-r_s)/(2r^3)$
+- **de Sitter / anti-de Sitter**: Ricci scalar matches analytic values
+- **Geodesic equations**: Free particle in Minkowski
+- **Index roundtrip**: Raise then lower recovers original tensor
 - **EinsteinPy cross-validation**: Christoffel and Ricci match
 
 ## License
