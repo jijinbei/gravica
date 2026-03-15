@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from symbolica import Expression
 
 from gravica.metric import MetricTensor, Grid, ZERO
 from gravica.simplify import simplify, str_is_zero

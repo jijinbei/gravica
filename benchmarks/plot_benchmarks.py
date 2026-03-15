@@ -7,7 +7,6 @@ import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 import numpy as np
 
 RESULTS_PATH = Path("benchmarks/results.json")
@@ -64,8 +63,8 @@ def plot_time_comparison(results: dict) -> None:
         x = np.arange(len(steps))
         width = 0.35
 
-        bars_atlas = ax.bar(x - width / 2, atlas_times, width, label="Gravica", color=COLORS["gravica"], zorder=3)
-        bars_epy = ax.bar(x + width / 2, epy_times, width, label="EinsteinPy", color=COLORS["einsteinpy"], zorder=3)
+        ax.bar(x - width / 2, atlas_times, width, label="Gravica", color=COLORS["gravica"], zorder=3)
+        ax.bar(x + width / 2, epy_times, width, label="EinsteinPy", color=COLORS["einsteinpy"], zorder=3)
 
         ax.set_title(METRIC_LABELS[metric], fontsize=12, fontweight="bold")
         ax.set_xticks(x)
@@ -131,7 +130,7 @@ def plot_speedup(results: dict) -> None:
             y += count * (bar_height + 0.05) + group_gap
 
     ax.set_yticks([p for p, _ in step_label_positions])
-    ax.set_yticklabels([l for _, l in step_label_positions], fontsize=10, fontweight="bold")
+    ax.set_yticklabels([label for _, label in step_label_positions], fontsize=10, fontweight="bold")
 
     ax.set_xscale("log")
     ax.set_xlabel("Speedup (Gravica / EinsteinPy)", fontsize=11)

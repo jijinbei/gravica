@@ -2,7 +2,6 @@
 
 from gravica.ricci import ricci_scalar
 from gravica.simplify import str_is_zero
-from conftest import assert_zero
 
 
 def test_minkowski_ricci_zero(mink_ricci):

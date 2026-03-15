@@ -20,10 +20,10 @@ def anti_de_sitter() -> MetricTensor:
     :math:`\Lambda = -3/l^2`).
     """
     t, r, theta, phi = S('t'), S('r'), S('theta'), S('phi')
-    l = S('l')
+    ads_l = S('l')
     sin = S('sin')
 
-    f = ONE + r**2 / l**2
+    f = ONE + r**2 / ads_l**2
 
     g = [
         [f, ZERO, ZERO, ZERO],

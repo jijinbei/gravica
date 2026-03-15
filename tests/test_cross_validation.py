@@ -2,20 +2,18 @@
 
 import pytest
 import sympy
-from sympy import symbols, sin, diag, simplify as sp_simplify, Rational
+from sympy import symbols, sin, diag, simplify as sp_simplify
 from einsteinpy.symbolic import (
     MetricTensor as EPyMetric,
     ChristoffelSymbols as EPyChristoffel,
     RiemannCurvatureTensor as EPyRiemann,
     RicciTensor as EPyRicci,
-    EinsteinTensor as EPyEinstein,
 )
 
 from gravica.metrics.schwarzschild import schwarzschild
 from gravica.christoffel import ChristoffelSymbols
 from gravica.riemann import RiemannTensor
-from gravica.ricci import RicciTensor, ricci_scalar
-from gravica.einstein import EinsteinTensor
+from gravica.ricci import RicciTensor
 
 
 def _atlas_to_sympy(expr_str: str) -> sympy.Expr:

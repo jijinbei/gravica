@@ -7,7 +7,6 @@ from collections import namedtuple
 from symbolica import Expression, S
 
 from gravica.christoffel import ChristoffelSymbols
-from gravica.metric import ZERO
 from gravica.simplify import str_is_zero
 
 

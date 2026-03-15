@@ -5,7 +5,7 @@ from __future__ import annotations
 from symbolica import Expression
 
 from gravica.riemann import RiemannTensor
-from gravica.metric import MetricTensor, ZERO
+from gravica.metric import ZERO
 from gravica.simplify import simplify, str_is_zero
 
 

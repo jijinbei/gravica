@@ -88,7 +88,7 @@ def bench_atlas(metric_name: str) -> dict:
     # Ricci scalar
     gc.disable()
     t0 = time.perf_counter()
-    R = ricci_scalar(ric)
+    ricci_scalar(ric)
     results['ricci_scalar'] = time.perf_counter() - t0
     gc.enable()
 
@@ -195,7 +195,7 @@ def run_single(metric_name: str) -> dict:
     atlas_runs = []
     for i in range(3):
         if i == 0:
-            print(f"  Gravica warmup...", end="", flush=True)
+            print("  Gravica warmup...", end="", flush=True)
         r = bench_atlas(metric_name)
         if i == 0:
             print(" done")
@@ -205,7 +205,7 @@ def run_single(metric_name: str) -> dict:
     epy_runs = []
     for i in range(3):
         if i == 0:
-            print(f"  EinsteinPy warmup...", end="", flush=True)
+            print("  EinsteinPy warmup...", end="", flush=True)
         r = bench_einsteinpy(metric_name)
         if i == 0:
             print(" done")

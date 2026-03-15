@@ -1,6 +1,6 @@
 """Tests for Christoffel symbols."""
 
-from gravica.simplify import simplify, str_is_zero
+from gravica.simplify import str_is_zero
 from conftest import assert_zero
 
 

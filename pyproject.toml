@@ -14,6 +14,7 @@ dev = [
     "jupyter>=1.1.1",
     "matplotlib>=3.10.8",
     "pytest>=9.0.2",
+    "ruff>=0.15.6",
     "sympy>=1.14.0",
     "twine>=6.2.0",
 ]
@@ -32,6 +33,9 @@ addopts = "-v"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.ruff.lint.per-file-ignores]
+"tutorials/*.ipynb" = ["E402"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/gravica"]

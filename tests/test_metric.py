@@ -1,7 +1,6 @@
 """Tests for metric tensor operations."""
 
-from gravica.metric import MetricTensor, symbolic_det, symbolic_inverse
-from gravica.simplify import simplify, is_zero
+from gravica.simplify import simplify
 from conftest import check_inverse_identity
 
 

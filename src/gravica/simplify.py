@@ -33,7 +33,6 @@ def is_zero(expr: Expression, coords: tuple[Expression, ...] | None = None) -> b
     substitution if that is inconclusive.
     """
     s = simplify(expr)
-    text = str(s)
     if str_is_zero(s):
         return True
 
