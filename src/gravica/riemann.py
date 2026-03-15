@@ -75,6 +75,33 @@ class RiemannTensor:
         r""":math:`R^a_{\ bcd}` = ``riemann[a, b, c, d]``."""
         return self.components[idx[0]][idx[1]][idx[2]][idx[3]]
 
+    def fully_contravariant(self, a: int, b: int, c: int, d: int) -> Expression:
+        r""":math:`R^{abcd} = g^{ae}\,g^{bf}\,g^{cg}\,g^{dh}\,R_{efgh}`."""
+        g_inv = self.metric.inverse
+        n = self.dim
+        val = ZERO
+        for e in range(n):
+            if str_is_zero(g_inv[a][e]):
+                continue
+            for f in range(n):
+                if str_is_zero(g_inv[b][f]):
+                    continue
+                for g in range(n):
+                    if str_is_zero(g_inv[c][g]):
+                        continue
+                    for h in range(n):
+                        if str_is_zero(g_inv[d][h]):
+                            continue
+                        r_efgh = self.fully_covariant(e, f, g, h)
+                        if str_is_zero(r_efgh):
+                            continue
+                        val = val + (
+                            g_inv[a][e] * g_inv[b][f]
+                            * g_inv[c][g] * g_inv[d][h]
+                            * r_efgh
+                        )
+        return simplify(val)
+
     def fully_covariant(self, a: int, b: int, c: int, d: int) -> Expression:
         r""":math:`R_{abcd} = g_{ae}\,R^e_{\ bcd}`."""
         g = self.metric.components

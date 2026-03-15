@@ -7,6 +7,7 @@ from gravica.weyl import WeylTensor
 from gravica.kretschner import kretschner_scalar
 from gravica.schouten import SchoutenTensor
 from gravica.geodesic import geodesic_equations, GeodesicEquations
+from gravica.indexing import raise_index_2d, lower_index_2d
 from gravica import display, check
 
 __all__ = [
@@ -21,6 +22,8 @@ __all__ = [
     "SchoutenTensor",
     "geodesic_equations",
     "GeodesicEquations",
+    "raise_index_2d",
+    "lower_index_2d",
     "display",
     "check",
 ]
