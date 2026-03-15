@@ -4,8 +4,11 @@ from __future__ import annotations
 
 from symbolica import Expression
 
+from gravica.christoffel import ChristoffelSymbols
+from gravica.riemann import RiemannTensor
+from gravica.ricci import RicciTensor
 from gravica.einstein import EinsteinTensor
-from gravica.metric import ZERO
+from gravica.metric import MetricTensor, ZERO
 from gravica.simplify import simplify
 
 
@@ -34,6 +37,18 @@ class StressEnergyTensor:
         self.dim = einstein.dim
         self.cosmological_constant = cosmological_constant
         self._components: list[list[Expression]] | None = None
+
+    @classmethod
+    def from_metric(
+        cls,
+        metric: MetricTensor,
+        cosmological_constant: Expression | None = None,
+    ) -> StressEnergyTensor:
+        """Build from a :class:`~gravica.metric.MetricTensor`."""
+        einstein = EinsteinTensor(
+            RicciTensor(RiemannTensor(ChristoffelSymbols(metric)))
+        )
+        return cls(einstein, cosmological_constant)
 
     @property
     def components(self) -> list[list[Expression]]:

@@ -32,3 +32,12 @@ def test_schouten_symmetric(ds_ricci):
         for b in range(a + 1, n):
             diff = simplify(S[a, b] - S[b, a])
             assert str_is_zero(diff), f"S[{a},{b}] != S[{b},{a}]"
+
+
+def test_from_metric(mink):
+    """SchoutenTensor.from_metric should produce the same results."""
+    S = SchoutenTensor.from_metric(mink)
+    n = S.dim
+    for a in range(n):
+        for b in range(n):
+            assert str_is_zero(S[a, b]), f"S[{a},{b}] = {S[a, b]}, expected 0"

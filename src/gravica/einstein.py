@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from symbolica import Expression
 
+from gravica.christoffel import ChristoffelSymbols
+from gravica.riemann import RiemannTensor
 from gravica.ricci import RicciTensor, ricci_scalar
-from gravica.metric import ZERO
+from gravica.metric import MetricTensor, ZERO
 from gravica.simplify import simplify
 
 
@@ -18,6 +20,11 @@ class EinsteinTensor:
         self.dim = ricci.dim
         self._components: list[list[Expression]] | None = None
         self._scalar: Expression | None = None
+
+    @classmethod
+    def from_metric(cls, metric: MetricTensor) -> EinsteinTensor:
+        """Build from a :class:`~gravica.metric.MetricTensor`."""
+        return cls(RicciTensor(RiemannTensor(ChristoffelSymbols(metric))))
 
     @property
     def scalar(self) -> Expression:

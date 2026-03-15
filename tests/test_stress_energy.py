@@ -47,3 +47,12 @@ def test_stress_energy_symmetric(rn_einstein):
         for b in range(a + 1, n):
             diff = simplify(T[a, b] - T[b, a])
             assert str_is_zero(diff), f"T[{a},{b}] != T[{b},{a}]"
+
+
+def test_from_metric(mink):
+    """StressEnergyTensor.from_metric should produce the same results."""
+    T = StressEnergyTensor.from_metric(mink)
+    n = T.dim
+    for a in range(n):
+        for b in range(n):
+            assert str_is_zero(T[a, b]), f"T[{a},{b}] = {T[a, b]}, expected 0"

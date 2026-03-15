@@ -1,5 +1,6 @@
 """Tests for Riemann curvature tensor."""
 
+from gravica.riemann import RiemannTensor
 from gravica.simplify import str_is_zero
 from conftest import assert_zero
 
@@ -31,3 +32,13 @@ def test_schwarzschild_nonzero_component(schw_riemann):
     """R^t_{rtr} should be nonzero for Schwarzschild."""
     R = schw_riemann
     assert not str_is_zero(R[0, 1, 0, 1])
+
+
+def test_from_metric(mink):
+    """RiemannTensor.from_metric should produce the same results."""
+    R = RiemannTensor.from_metric(mink)
+    for a in range(4):
+        for b in range(4):
+            for c in range(4):
+                for d in range(4):
+                    assert str_is_zero(R[a, b, c, d])

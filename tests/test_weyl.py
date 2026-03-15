@@ -1,5 +1,6 @@
 """Tests for Weyl tensor."""
 
+from gravica.weyl import WeylTensor
 from gravica.simplify import str_is_zero
 
 
@@ -25,3 +26,13 @@ def test_schwarzschild_weyl_nonzero(schw_weyl):
         for d in range(4)
     )
     assert has_nonzero, "Schwarzschild Weyl tensor should have nonzero components"
+
+
+def test_from_metric(mink):
+    """WeylTensor.from_metric should produce the same results."""
+    W = WeylTensor.from_metric(mink)
+    for a in range(4):
+        for b in range(4):
+            for c in range(4):
+                for d in range(4):
+                    assert str_is_zero(W[a, b, c, d])

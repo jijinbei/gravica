@@ -5,7 +5,7 @@ from __future__ import annotations
 from symbolica import Expression
 
 from gravica.christoffel import ChristoffelSymbols
-from gravica.metric import ZERO
+from gravica.metric import MetricTensor, ZERO
 from gravica.simplify import simplify, str_is_zero
 
 
@@ -26,6 +26,11 @@ class RiemannTensor:
         self.dim = christoffel.dim
         self.coords = christoffel.coords
         self._components: list[list[list[list[Expression]]]] | None = None
+
+    @classmethod
+    def from_metric(cls, metric: MetricTensor) -> RiemannTensor:
+        """Build from a :class:`~gravica.metric.MetricTensor`."""
+        return cls(ChristoffelSymbols(metric))
 
     @property
     def components(self) -> list[list[list[list[Expression]]]]:
