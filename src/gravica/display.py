@@ -3,6 +3,54 @@
 from gravica.simplify import str_is_zero
 
 
+def _fix_der_latex(s):
+    r"""Replace Symbolica's ``der\!\left(N, FUNC\right)`` with dot notation.
+
+    - ``der(1, f)`` → ``\dot{f}``
+    - ``der(2, f)`` → ``\ddot{f}``
+    """
+    result = s
+    while True:
+        idx = result.find(r"der\!\left(")
+        if idx == -1:
+            break
+        start = idx
+        pos = idx + len(r"der\!\left(")
+
+        comma = result.index(",", pos)
+        order = result[pos:comma].strip()
+
+        pos = comma + 1
+        depth = 1
+        while depth > 0 and pos < len(result):
+            if result[pos:].startswith(r"\left("):
+                depth += 1
+                pos += len(r"\left(")
+            elif result[pos:].startswith(r"\right)"):
+                depth -= 1
+                if depth == 0:
+                    break
+                pos += len(r"\right)")
+            else:
+                pos += 1
+
+        end = pos + len(r"\right)")
+        func_latex = result[comma + 1 : pos].strip()
+
+        if order == "1":
+            replacement = r"\dot{" + func_latex + "}"
+        elif order == "2":
+            replacement = r"\ddot{" + func_latex + "}"
+        else:
+            replacement = (
+                r"\frac{d^{" + order + r"}}{dt^{" + order + r"}}" + func_latex
+            )
+
+        result = result[:start] + replacement + result[end:]
+
+    return result
+
+
 def _nonzero_components_2d(tensor, coord_names, symmetric=False):
     """Return list of (label, value) for non-zero rank-2 tensor components.
 
@@ -154,7 +202,9 @@ def components_table(items, tensor=None, *, tensor_symbol=None, index_style=None
         if hasattr(val, "to_latex"):
             from gravica.simplify import simplify
 
-            val_latex = simplify(val).to_latex().removeprefix("$$").removesuffix("$$")
+            val_latex = _fix_der_latex(
+                simplify(val).to_latex().removeprefix("$$").removesuffix("$$")
+            )
         else:
             val_latex = str(val)
         rows.append(f"| {tex} | ${val_latex}$ |")
