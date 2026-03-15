@@ -3,6 +3,7 @@
 from symbolica import Expression, S
 
 from gravica.metric import MetricTensor, ZERO, ONE
+from gravica.metrics._symbols import _greek
 
 NEG = Expression.num(-1)
 
@@ -19,7 +20,9 @@ def anti_de_sitter() -> MetricTensor:
     Parameter: :math:`l` (AdS radius, related to cosmological constant
     :math:`\Lambda = -3/l^2`).
     """
-    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    t, r = S("t"), S("r")
+    theta = _greek("theta")
+    phi = _greek("phi")
     ads_l = S("l")
     sin = S("sin")
 

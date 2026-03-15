@@ -3,6 +3,7 @@
 from symbolica import Expression, S
 
 from gravica.metric import MetricTensor, ZERO
+from gravica.metrics._symbols import _greek
 
 NEG = Expression.num(-1)
 
@@ -18,7 +19,9 @@ def reissner_nordstrom() -> MetricTensor:
 
     Parameters: :math:`r_s = 2GM/c^2`, :math:`r_Q^2 = GQ^2/(4\pi\varepsilon_0 c^4)`.
     """
-    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    t, r = S("t"), S("r")
+    theta = _greek("theta")
+    phi = _greek("phi")
     r_s = S("r_s")
     r_Q = S("r_Q")
     sin = S("sin")

@@ -3,6 +3,7 @@
 from symbolica import Expression, S
 
 from gravica.metric import MetricTensor, ZERO
+from gravica.metrics._symbols import _greek
 
 ONE = Expression.num(1)
 NEG = Expression.num(-1)
@@ -20,7 +21,9 @@ def schwarzschild() -> MetricTensor:
     Uses the rational form :math:`(r - r_s)/r` for better symbolic cancellation.
     Parameter: :math:`r_s = 2GM/c^2`.
     """
-    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    t, r = S("t"), S("r")
+    theta = _greek("theta")
+    phi = _greek("phi")
     r_s = S("r_s")
     sin = S("sin")
 

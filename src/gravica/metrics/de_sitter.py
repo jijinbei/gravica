@@ -3,6 +3,7 @@
 from symbolica import Expression, S
 
 from gravica.metric import MetricTensor, ZERO, ONE
+from gravica.metrics._symbols import _greek
 
 NEG = Expression.num(-1)
 
@@ -18,8 +19,10 @@ def de_sitter() -> MetricTensor:
 
     Parameter: :math:`\Lambda > 0` (cosmological constant).
     """
-    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
-    Lambda = S("Lambda")
+    t, r = S("t"), S("r")
+    theta = _greek("theta")
+    phi = _greek("phi")
+    Lambda = _greek("Lambda")
     sin = S("sin")
 
     f = ONE - Lambda * r**2 / Expression.num(3)

@@ -3,6 +3,7 @@
 from symbolica import Expression, S
 
 from gravica.metric import MetricTensor, ZERO
+from gravica.metrics._symbols import _greek
 
 ONE = Expression.num(1)
 NEG = Expression.num(-1)
@@ -19,7 +20,9 @@ def kerr() -> MetricTensor:
         \Sigma = r^2 + a^2 \cos^2\theta, \qquad
         \Delta = r^2 - 2Mr + a^2
     """
-    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    t, r = S("t"), S("r")
+    theta = _greek("theta")
+    phi = _greek("phi")
     M, a = S("M"), S("a")
     sin = S("sin")
     cos = S("cos")

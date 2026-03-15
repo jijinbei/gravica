@@ -3,6 +3,7 @@
 from symbolica import Expression, S
 
 from gravica.metric import MetricTensor, ZERO
+from gravica.metrics._symbols import _greek
 
 ONE = Expression.num(1)
 NEG = Expression.num(-1)
@@ -19,7 +20,9 @@ def flrw() -> MetricTensor:
 
     Parameters: :math:`k` (spatial curvature), :math:`a(t)` (scale factor).
     """
-    t, r, theta, phi = S("t"), S("r"), S("theta"), S("phi")
+    t, r = S("t"), S("r")
+    theta = _greek("theta")
+    phi = _greek("phi")
     k = S("k")
     a_sym = S("a")
     sin = S("sin")

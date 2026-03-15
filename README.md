@@ -23,7 +23,15 @@ API reference: [https://site.jijinbei.jp/gravica/](https://site.jijinbei.jp/grav
 
 ## Quick Start
 
-See [tutorials/getting_started.ipynb](tutorials/getting_started.ipynb) for a step-by-step guide.
+| Tutorial | Topics |
+|----------|--------|
+| [Getting Started](tutorials/getting_started.ipynb) | Schwarzschild metric, full pipeline (Metric → Christoffel → Riemann → Ricci → Einstein) |
+| [Predefined Metrics](tutorials/predefined_metrics.ipynb) | All 8 built-in metrics: Minkowski, Schwarzschild, Kerr, FLRW, Gödel, Reissner–Nordström, de Sitter, Anti-de Sitter |
+| [Weyl Tensor & Kretschner Scalar](tutorials/weyl_and_kretschner.ipynb) | Curvature invariants, singularity detection, vacuum identity $C_{abcd} = R_{abcd}$ |
+| [Geodesic Equations](tutorials/geodesic_equations.ipynb) | Symbolic equations of motion for Schwarzschild and Kerr spacetimes |
+| [Index Manipulation](tutorials/index_manipulation.ipynb) | Raising and lowering tensor indices, round-trip verification |
+| [Kerr Black Hole](tutorials/kerr_black_hole.ipynb) | Full tensor pipeline on the Kerr metric, vacuum solution verification |
+| [FLRW Cosmology](tutorials/cosmology_flrw.ipynb) | Stress-energy tensor, cosmological constant, Schouten tensor |
 
 ## Benchmarks: Gravica vs EinsteinPy
 
