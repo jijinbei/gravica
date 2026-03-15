@@ -11,6 +11,10 @@ Gravica computes the full GR tensor chain — from metric tensor to Einstein ten
 - Lazy evaluation with caching
 - Cross-validated against EinsteinPy
 
+## Documentation
+
+API reference: [https://site.jijinbei.jp/gravica/](https://site.jijinbei.jp/gravica/)
+
 ## Quick Start
 
 ```bash
