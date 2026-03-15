@@ -1,5 +1,7 @@
 # Gravica
 
+[![PyPI](https://img.shields.io/pypi/v/gravica)](https://pypi.org/project/gravica/)
+
 General Relativity computation library built on [Symbolica](https://symbolica.io/) (Rust-powered CAS).
 
 Gravica computes the full GR tensor chain — from metric tensor to Einstein tensor — using Symbolica's high-performance symbolic algebra engine, achieving **23x–4300x speedup** over EinsteinPy/SymPy.
