@@ -34,7 +34,7 @@ riemann = RiemannTensor(christoffel)
 ricci = RicciTensor(riemann)
 einstein = EinsteinTensor(ricci)
 
-# Verify vacuum solution: G_{ab} = 0
+# Verify vacuum solution: G_ab = 0
 for a in range(4):
     for b in range(4):
         assert str(einstein[a, b]) == "0"
@@ -80,12 +80,12 @@ MetricTensor → ChristoffelSymbols → RiemannTensor → RicciTensor → Einste
 
 | Module | Computes |
 |---|---|
-| `metric.py` | g_{ab}, g^{ab}, det(g) |
-| `christoffel.py` | Γ^a_{bc} = g^{ad} ½(∂_b g_{ac} + ∂_c g_{ab} - ∂_a g_{bc}) |
-| `riemann.py` | R^a_{bcd} = ∂_c Γ^a_{db} - ∂_d Γ^a_{cb} + Γ^a_{ce}Γ^e_{db} - Γ^a_{de}Γ^e_{cb} |
-| `ricci.py` | R_{ab} = R^c_{acb}, R = g^{ab} R_{ab} |
-| `einstein.py` | G_{ab} = R_{ab} - ½ g_{ab} R |
-| `weyl.py` | C_{abcd} (Weyl conformal tensor) |
+| `metric.py` | $g_{ab}$, $g^{ab}$, $\det(g)$ |
+| `christoffel.py` | $\Gamma^a_{\ bc} = g^{ad}\,\tfrac{1}{2}(\partial_b\,g_{ac} + \partial_c\,g_{ab} - \partial_a\,g_{bc})$ |
+| `riemann.py` | $R^a_{\ bcd} = \partial_c\,\Gamma^a_{\ db} - \partial_d\,\Gamma^a_{\ cb} + \Gamma^a_{\ ce}\,\Gamma^e_{\ db} - \Gamma^a_{\ de}\,\Gamma^e_{\ cb}$ |
+| `ricci.py` | $R_{ab} = R^c_{\ acb}$, $R = g^{ab}\,R_{ab}$ |
+| `einstein.py` | $G_{ab} = R_{ab} - \tfrac{1}{2}\,g_{ab}\,R$ |
+| `weyl.py` | $C_{abcd}$ (Weyl conformal tensor) |
 
 ## Tests
 
@@ -94,10 +94,10 @@ uv run pytest tests/ -v
 ```
 
 Verified properties:
-- **Minkowski**: All tensors = 0
-- **Schwarzschild**: R_{ab} = 0, G_{ab} = 0 (vacuum solution)
-- **Riemann symmetries**: R^a_{bcd} = -R^a_{bdc}
-- **Christoffel known values**: Γ^r_{tt} = r_s(r-r_s)/(2r³)
+- **Minkowski**: All tensors $= 0$
+- **Schwarzschild**: $R_{ab} = 0$, $G_{ab} = 0$ (vacuum solution)
+- **Riemann symmetries**: $R^a_{\ bcd} = -R^a_{\ bdc}$
+- **Christoffel known values**: $\Gamma^r_{\ tt} = r_s(r-r_s)/(2r^3)$
 - **EinsteinPy cross-validation**: Christoffel and Ricci match
 
 ## License
